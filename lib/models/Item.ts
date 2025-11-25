@@ -1,5 +1,6 @@
-import { Schema, model, models } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 export type ItemSchemaType = {
+  type: string;
   title: string;
   description: string;
   category: string;
@@ -22,4 +23,5 @@ const ItemSchema = new Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-export default models.Item || model("Item", ItemSchema);
+export default mongoose.models.Item ||
+  mongoose.model<ItemSchemaType>("Item", ItemSchema);

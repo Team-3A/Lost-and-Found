@@ -1,7 +1,8 @@
 import Item from "../models/Item";
-import connectDB from "../mongodb";
+import { connectDB } from "../mongodb";
 
 export const createItem = async (itemData: {
+  type: string;
   title: string;
   desc: string;
   category: string;
@@ -13,5 +14,5 @@ export const createItem = async (itemData: {
   await connectDB();
   const newItem = new Item({ ...itemData });
   await newItem.save();
-  return true;
+  return newItem;
 };
