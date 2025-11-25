@@ -1,4 +1,3 @@
-import { Header } from "./components/navigantion/Header";
 import HeroSection from "./components/main/HeroSection";
 
 export default function Home() {
