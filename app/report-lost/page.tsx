@@ -1,3 +1,5 @@
+"use client";
+
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -7,7 +9,36 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
 export default function ReportLost() {
+  const [title, setTitle] = useState<string>("");
+  const [desc, setDesc] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+
+  const handleSubmit = async () => {
+    const payload = {
+      title,
+      desc,
+      category,
+      location,
+      email,
+      phone,
+    };
+
+    const res = await fetch("/api/items", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+    alert(data.message);
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <div className="px-8 py-10 flex flex-col items-center">
@@ -24,6 +55,8 @@ export default function ReportLost() {
           <div className="mt-6">
             <h4 className="text-md font-medium">Item Title</h4>
             <Textarea
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               className="mt-2"
               placeholder="e.g., Black Leather Wallet"
             />
@@ -32,6 +65,8 @@ export default function ReportLost() {
           <div className="mt-4">
             <h4 className="text-md font-medium">Description</h4>
             <Textarea
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
               className="mt-2"
               placeholder="Provide a detailed description of the item and its condition."
             />
@@ -40,7 +75,7 @@ export default function ReportLost() {
           <div className="mt-4">
             <h4 className="text-md font-medium">Category</h4>
             <div className="mt-2 ">
-              <Select>
+              <Select onValueChange={setCategory}>
                 <SelectTrigger className="w-[455px]">
                   <SelectValue placeholder="Select a category" />
                 </SelectTrigger>
@@ -56,6 +91,8 @@ export default function ReportLost() {
         <div className=" max-w-4xl border rounded-md p-8 bg-white mt-6">
           <h2 className="text-xl font-semibold mb-1">Location Information</h2>
           <input
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
             placeholder="e.g., Central Park, Main Street Cafe"
             className="w-full"
           ></input>
@@ -94,6 +131,8 @@ export default function ReportLost() {
               <Input
                 id="email"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="your.email@example.com"
                 className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -105,6 +144,8 @@ export default function ReportLost() {
               </label>
               <Input
                 id="phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 type="tel"
                 placeholder="+1 (123) 456-7890"
                 className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -112,6 +153,12 @@ export default function ReportLost() {
             </div>
           </div>
         </div>
+        <Button
+          onClick={handleSubmit}
+          className=" w-[520px] mt-6 borde font-semibold bg-blue-600"
+        >
+          Submit Lost Item Report
+        </Button>
       </div>
     </div>
   );
