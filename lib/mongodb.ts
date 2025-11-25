@@ -1,50 +1,26 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URL;
+const MONGODB_URI = process.env.MONGODB_URI as string;
 
 if (!MONGODB_URI) {
   throw new Error(
-    "Please define the MONGODB_URL environment variable inside .env.local"
+    "Please define the MONGODB_URI environment variable inside .env.local"
   );
 }
 
-declare global {
-  var mongoose:
-    | {
-        conn: typeof mongoose | null;
-        promise: Promise<typeof mongoose> | null;
-      }
-    | undefined;
-}
+let cached = (global as any).mongoose || { conn: null, promise: null };
 
-let cached = global.mongoose;
+export async function connectDB() {
+  if (cached.conn) return cached.conn;
 
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
-
-async function connectDB() {
-  if (cached!.conn) {
-    return cached!.conn;
+  if (!cached.promise) {
+    cached.promise = mongoose
+      .connect(MONGODB_URI, {
+        dbName: "Lost",
+      })
+      .then((mongoose) => mongoose);
   }
 
-  if (!cached!.promise) {
-    const opts = {
-      bufferCommands: false,
-    };
-
-    // @ts-expect-error - Type issue with mongoose connection caching
-    cached!.promise = mongoose.connect(MONGODB_URI!, opts);
-  }
-
-  try {
-    const mongooseInstance = await cached!.promise;
-    cached!.conn = mongooseInstance;
-    return mongooseInstance;
-  } catch (e) {
-    cached!.promise = null;
-    throw e;
-  }
+  cached.conn = await cached.promise;
+  return cached.conn;
 }
-
-export default connectDB;
