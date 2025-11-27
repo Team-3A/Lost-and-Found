@@ -9,7 +9,7 @@ export const createItem = async (itemData: {
   location: string;
   phone: number;
   email: string;
-  image: string;
+  imageUrl: string;
 }) => {
   await connectDB();
   const newItem = new Item({ ...itemData });

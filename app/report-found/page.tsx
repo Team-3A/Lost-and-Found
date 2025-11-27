@@ -27,17 +27,19 @@ export default function ReportFound() {
     formData.append("type", type);
     formData.append("title", title);
     formData.append("desc", desc);
+    formData.append("email", email);
     formData.append("category", category);
     formData.append("location", location);
     formData.append("phone", String(phone));
     if (image) formData.append("image", image);
 
-    const res = await fetch("/api/found", {
+    const res = await fetch("/api/lost", {
       method: "POST",
       body: formData,
     });
 
     const data = await res.json();
+    console.log({ data });
     alert(data.message || "Saved");
   };
 
