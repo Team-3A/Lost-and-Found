@@ -14,7 +14,7 @@ export async function GET() {
   };
   const itemData = await getAllItem();
   const response = NextResponse.json({ data: itemData }, { status: 200 });
-  response.headers.set("Access-Control-Allow-Origin", "*"); // Or '*' for all origins
+  response.headers.set("Access-Control-Allow-Origin", "*");
   response.headers.set(
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, OPTIONS"
@@ -28,6 +28,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
+  const type = formData.get("type") as string;
   const title = formData.get("title") as string;
   const desc = formData.get("desc") as string;
   const category = formData.get("category") as string;
@@ -43,7 +44,7 @@ export async function POST(request: NextRequest) {
   const uploadedUrl = await uploadImageToCloudinary(image);
 
   const result = await createItem({
-    type: "lost",
+    type,
     title,
     desc,
     category,
