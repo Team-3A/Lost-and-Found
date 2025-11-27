@@ -28,6 +28,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
+  console.log({ formData });
   const type = formData.get("type") as string;
   const title = formData.get("title") as string;
   const desc = formData.get("desc") as string;
@@ -37,7 +38,7 @@ export async function POST(request: NextRequest) {
   const email = formData.get("email") as string;
   const phone = formData.get("phone") as string;
 
-  if (!title || !desc || !category || !location || !email || !phone) {
+  if (!title || !desc || !category || !location || !email || !phone || !type) {
     return NextResponse.json({ error: "ALl fields are required!" });
   }
 
@@ -49,12 +50,11 @@ export async function POST(request: NextRequest) {
     desc,
     category,
     location,
-    image: uploadedUrl,
+    imageUrl: uploadedUrl,
     email,
     phone: parseFloat(phone),
   });
   console.log({ result });
-
   if (result) {
     return NextResponse.json(
       { message: "Lost/Found item received successfully" },

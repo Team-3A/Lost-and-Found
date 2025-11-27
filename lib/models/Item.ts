@@ -13,7 +13,7 @@ export type ItemSchemaType = {
 const ItemSchema = new Schema({
   type: { type: String, enum: ["lost", "found"], required: true },
   title: String,
-  description: String,
+  desc: String,
   category: String,
   location: String,
   date: Date,
