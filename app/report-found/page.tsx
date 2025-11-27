@@ -7,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 export default function ReportFound() {
   return (
     <div className="min-h-screen bg-white">
@@ -122,6 +123,9 @@ export default function ReportFound() {
             </div>
           </div>
         </div>
+        <Button className=" w-[520px] mt-6 borde font-semibold bg-blue-600">
+          Submit Found Item Report
+        </Button>
       </div>
     </div>
   );
