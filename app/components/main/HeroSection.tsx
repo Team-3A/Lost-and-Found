@@ -76,6 +76,9 @@ export default async function HeroSection() {
           </div>
         </div>
       </section>
+      <h1 className="text-4xl flex justify-center items-center font-semibold">
+        Recently Found & Lost Items
+      </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 mx-auto max-w-5xl gap-5 bg-white mt-16 ">
         {items
           .filter((item: any) => item.type === "lost")
