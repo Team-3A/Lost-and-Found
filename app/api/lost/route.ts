@@ -9,7 +9,7 @@ export async function GET() {
   const getAllItem = async () => {
     await connectDB();
     Item;
-    const allNewItem: ItemSchemaType[] = await Item.find().populate("itemId");
+    const allNewItem: ItemSchemaType[] = await Item.find();
     return allNewItem;
   };
   const itemData = await getAllItem();
