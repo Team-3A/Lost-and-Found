@@ -8,9 +8,33 @@ import Link from "next/link";
 import Card from "./Card";
 
 export default async function HeroSection() {
+  async function getItems() {
+    const res = await fetch("http://localhost:3000/api/item", {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      console.log("API error:", res.status);
+      return [];
+    }
+
+    const json = await res.json().catch(() => null);
+
+    if (!json || !json.data) {
+      console.error("Invalid JSON returned");
+      return [];
+    }
+
+    return json.data;
+  }
+
+  const items = await getItems();
+  console.log({ items });
+
   return (
-    <div>
-      <section className="w-full py-20 bg-linear-to-b from-[#CDE4FF] to-white">
+    <div className=" bg-gradient-to-b from-sky-100 via-blue-300 to-white">
+      {/* <section className="w-full py-20 bg-linear-to-b from-[#CDE4FF] to-white"> */}
+      <section className="w-full py-20">
         <div className="absolute top-2 right-4">
           <UserButton />
         </div>
@@ -25,7 +49,7 @@ export default async function HeroSection() {
 
           <div>
             <Input
-              placeholder="Search lost items..."
+              placeholder="Search lost/found items..."
               className="w-[570px] text-[14px] pl-10 border-[#E1E1FF] border-solid rounded-md mt-30 bg-white h-10"
             ></Input>
           </div>

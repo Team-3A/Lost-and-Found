@@ -13,11 +13,21 @@ import {
 } from "@/components/ui/navigation-menu";
 import { useIsMobile } from "../../hooks/use-mobile";
 
-import { Input } from "@/components/ui/input";
+import {
+  Wallet,
+  Smartphone,
+  Briefcase,
+  Key,
+  Laptop,
+  FileText,
+  Shirt,
+  Gem,
+  PawPrint,
+  Box,
+} from "lucide-react";
 
 import {
   ClerkProvider,
-  SignIn,
   SignInButton,
   SignUpButton,
   SignedIn,
@@ -25,15 +35,80 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 
+import { SearchBar } from "../search/SearchBar";
+
 export function Header() {
   const isMobile = useIsMobile();
 
+  const categories = [
+    {
+      name: "Wallet",
+      href: "/categories/wallet",
+      icon: Wallet,
+      description: "Lost wallets & purses",
+    },
+    {
+      name: "Phone",
+      href: "/categories/phone",
+      icon: Smartphone,
+      description: "Mobiles & tablets",
+    },
+    {
+      name: "Bag",
+      href: "/categories/bag",
+      icon: Briefcase,
+      description: "Backpacks & luggage",
+    },
+    {
+      name: "Keys",
+      href: "/categories/keys",
+      icon: Key,
+      description: "House & car keys",
+    },
+    {
+      name: "Electronics",
+      href: "/categories/electronics",
+      icon: Laptop,
+      description: "Gadgets & devices",
+    },
+    {
+      name: "Documents",
+      href: "/categories/documents",
+      icon: FileText,
+      description: "IDs & papers",
+    },
+    {
+      name: "Clothes",
+      href: "/categories/clothes",
+      icon: Shirt,
+      description: "Apparel & accessories",
+    },
+    {
+      name: "Jewelry",
+      href: "/categories/jewelry",
+      icon: Gem,
+      description: "Watches & rings",
+    },
+    {
+      name: "Pet",
+      href: "/categories/pet",
+      icon: PawPrint,
+      description: "Lost pets",
+    },
+    {
+      name: "Others",
+      href: "/categories/others",
+      icon: Box,
+      description: "Miscellaneous items",
+    },
+  ];
+
   return (
-    <header className="w-full border-b bg-white/70 backdrop-blur-md sticky top-0 z-50 ">
-      <div className="mx-auto flex items-center justify-between px-4 py-3">
-        <div className="flex items-center gap-2">
-          <Image src="/location.png" alt="logo" width={28} height={28} />
-          <h2 className="text-2xl font-semibold text-blue-600">
+    <header className="w-full border-b bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+      <div className="mx-auto flex items-center justify-between px-4 py-3 max-w-7xl">
+        <div className="flex items-center gap-2 cursor-pointer hover:opacity-90 transition">
+          <Image src="/location.png" alt="logo" width={32} height={32} />
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
             Sentinel Trace
           </h2>
         </div>
@@ -41,12 +116,11 @@ export function Header() {
         {!isMobile && (
           <NavigationMenu>
             <NavigationMenuList className="flex items-center gap-6">
-              <div></div>
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <Link
                     href="/"
-                    className="hover:text-blue-600 transition text-[16px] font-medium"
+                    className="hover:text-blue-600 transition text-[15px] font-medium text-gray-700"
                   >
                     Home
                   </Link>
@@ -54,44 +128,83 @@ export function Header() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-[16px]">
+                <NavigationMenuTrigger className="text-[15px] font-medium text-gray-700 bg-transparent hover:bg-gray-100/50">
                   Categories
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[250px] gap-3 p-3">
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <Link href="/categories/electronics">Electronics</Link>
-                      </NavigationMenuLink>
-                    </li>
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <Link href="/categories/bags">Bags</Link>
-                      </NavigationMenuLink>
-                    </li>
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <Link href="/categories/pets">Pets</Link>
-                      </NavigationMenuLink>
-                    </li>
+                  <ul className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                    {categories.map((item, index) => (
+                      <li key={index}>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            href={item.href}
+                            className="flex items-start gap-3 select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 group"
+                          >
+                            <div className="mt-1 p-1 bg-gray-100 rounded-md group-hover:bg-white group-hover:text-blue-600 transition">
+                              <item.icon className="h-5 w-5 text-gray-500 group-hover:text-blue-600" />
+                            </div>
+                            <div className="flex flex-col gap-1">
+                              <div className="text-sm font-semibold leading-none">
+                                {item.name}
+                              </div>
+                              <p className="line-clamp-2 text-xs leading-snug text-muted-foreground group-hover:text-blue-600/70">
+                                {item.description}
+                              </p>
+                            </div>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-[16px]">
+                <NavigationMenuTrigger className="text-[15px] font-medium text-gray-700 bg-transparent hover:bg-gray-100/50">
                   Submit Item
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[200px] gap-2 p-3">
-                    <li>
+                  <ul className="grid gap-3 p-4 w-[250px]">
+                    <li className="row-span-3">
                       <NavigationMenuLink asChild>
-                        <Link href="/report-lost">Submit Lost Item</Link>
+                        <div className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-blue-500 to-indigo-600 p-6 no-underline outline-none focus:shadow-md">
+                          <div className="mb-2 mt-4 text-lg font-medium text-white">
+                            Lost something?
+                          </div>
+                          <p className="text-sm leading-tight text-white/90">
+                            Report it immediately to help our community find it.
+                          </p>
+                        </div>
                       </NavigationMenuLink>
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <Link href="/report-found">Submit Found Item</Link>
+                        <Link
+                          href="/report-lost"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">
+                            Submit Lost Item
+                          </div>
+                          <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
+                            I lost an item
+                          </p>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <Link
+                          href="/report-found"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">
+                            Submit Found Item
+                          </div>
+                          <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
+                            I found an item
+                          </p>
+                        </Link>
                       </NavigationMenuLink>
                     </li>
                   </ul>
@@ -100,21 +213,23 @@ export function Header() {
             </NavigationMenuList>
           </NavigationMenu>
         )}
-        <div className="flex gap-3">
-          <div className="relative">
-            <IoSearch className="absolute left-2 mt-2.5 text-gray-500" />
-            <Input
-              className="pl-8 w-[150px] bg-white border"
+
+        <div className="flex gap-4 items-center">
+          <div className="relative hidden md:block">
+            <IoSearch className="absolute left-2.5 top-2.5 text-gray-400" />
+            {/* <Input
+              className="pl-9 w-[200px] bg-gray-50 border-gray-200 focus:bg-white transition-all rounded-full h-9 text-sm"
               placeholder="Search..."
-            />
+            /> */}
+            <SearchBar />
           </div>
-          <div className="flex-1"></div>
-          <div className="flex gap-4 items-center">
+
+          <div className="flex gap-3 items-center">
             <ClerkProvider>
               <SignedOut>
                 <SignInButton />
                 <SignUpButton>
-                  <button className="bg-[#6c47ff] text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
+                  <button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-full font-medium text-sm h-9 px-5 transition shadow-sm hover:shadow-md">
                     Sign Up
                   </button>
                 </SignUpButton>

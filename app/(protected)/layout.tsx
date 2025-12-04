@@ -7,9 +7,7 @@ import { AiOutlineLoading } from "react-icons/ai";
 import { UserResource } from "@clerk/types";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
-import Footer from "../components/navigantion/Footer";
 import { UserType } from "@/lib/types";
-import { Header } from "../components/navigantion/Header";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { user, isLoaded } = useUser();
@@ -86,10 +84,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="w-screen h-screen flex flex-col">
       <>
-        <Header />
         {children}
         <Toaster position="top-center" />
-        <Footer />
       </>
     </div>
   );
