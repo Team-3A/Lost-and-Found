@@ -1,6 +1,6 @@
 "use client";
 
-import { useUser } from "@clerk/nextjs";
+import { useAuth, useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AiOutlineLoading } from "react-icons/ai";
@@ -16,6 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [appUser, setAppUser] = useState<UserType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
+  const { getToken } = useAuth();
 
   useEffect(() => {
     if (isLoaded && !user) {
@@ -28,6 +29,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }, [isLoaded, user]);
 
   const createOrSyncUser = async (user: UserResource) => {
+    const token = await getToken();
+    console.log({ token });
+
     if (!user) {
       toast.warning("Missing required user data!");
       return;
@@ -41,6 +45,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         headers: {
           "Content-Type": "application/json",
           "X-App-Client": "sentinel-trace",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           clerkId: user.id,

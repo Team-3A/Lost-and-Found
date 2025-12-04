@@ -25,7 +25,7 @@ export default async function Card() {
   }
 
   const items = await getItems();
-  console.log({ items });
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 mx-auto max-w-5xl gap-5 bg-white mt-16 ">
       {items
@@ -36,8 +36,7 @@ export default async function Card() {
               <div className="relative h-40 w-full">
                 <Badge
                   className="absolute flex m-2 flex-end "
-                  variant="destructive"
-                >
+                  variant="destructive">
                   {item.type}
                 </Badge>
                 <Badge className="absolute bg-white text-black mt-21 mr-2 top-10 right-0">
@@ -46,8 +45,7 @@ export default async function Card() {
                 <img
                   src={item.imageUrl}
                   alt={item.title}
-                  className="w-full h-40 object-cover rounded-t-2xl"
-                ></img>
+                  className="w-full h-40 object-cover rounded-t-2xl"></img>
               </div>
 
               <h2 className="text-xl font-bold m-2">{item.title}</h2>
@@ -64,8 +62,7 @@ export default async function Card() {
               <div className="relative h-40 w-full">
                 <Badge
                   className="absolute flex m-2 flex-end bg-green-400"
-                  variant="default"
-                >
+                  variant="default">
                   {item.type}
                 </Badge>
                 <Badge className="absolute bg-white text-black mt-21 mr-2 top-10 right-0">
@@ -74,8 +71,7 @@ export default async function Card() {
                 <img
                   src={item.imageUrl}
                   alt={item.title}
-                  className="w-full h-40 object-cover rounded-t-2xl"
-                ></img>
+                  className="w-full h-40 object-cover rounded-t-2xl"></img>
               </div>
 
               <h2 className="text-xl font-bold m-2">{item.title}</h2>
