@@ -1,9 +1,11 @@
-import { Badge } from "@/components/ui/badge";
+// "use client";
+
 import { Input } from "@/components/ui/input";
+
 import { UserButton } from "@clerk/nextjs";
-import { MapPin } from "lucide-react";
 
 import Link from "next/link";
+import Card from "./Card";
 
 export default async function HeroSection() {
   async function getItems() {
@@ -80,60 +82,7 @@ export default async function HeroSection() {
       <h1 className="text-4xl flex justify-center items-center font-semibold">
         Recently Found & Lost Items
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 mx-auto max-w-5xl gap-5 bg-white mt-16 ">
-        {items
-          .filter((item: any) => item.type === "lost")
-          .map((item: any) => (
-            <div key={item._id} className="border rounded-2xl shadow-md">
-              <div className="relative h-40 w-full">
-                <Badge
-                  className="absolute flex m-2 flex-end "
-                  variant="destructive"
-                >
-                  {item.type}
-                </Badge>
-                <Badge className="absolute bg-white text-black mt-21 mr-2 top-10 right-0">
-                  <MapPin className="w-4 h-4" /> {item.location}
-                </Badge>
-                <img
-                  src={item.imageUrl}
-                  alt={item.title}
-                  className="w-full h-40 object-cover rounded-t-2xl"
-                ></img>
-              </div>
-
-              <h2 className="text-xl font-bold m-2">{item.title}</h2>
-              <p className="text-gray-600 m-2 mb-10">{item.category}</p>
-            </div>
-          ))
-          .slice(0, 4)}
-        {items
-          .filter((item: any) => item.type === "found")
-          .map((item: any) => (
-            <div key={item._id} className="border rounded-2xl shadow-md">
-              <div className="relative h-40 w-full">
-                <Badge
-                  className="absolute flex m-2 flex-end bg-green-400"
-                  variant="default"
-                >
-                  {item.type}
-                </Badge>
-                <Badge className="absolute bg-white text-black mt-21 mr-2 top-10 right-0">
-                  <MapPin className="w-4 h-4" /> {item.location}
-                </Badge>
-                <img
-                  src={item.imageUrl}
-                  alt={item.title}
-                  className="w-full h-40 object-cover rounded-t-2xl"
-                ></img>
-              </div>
-
-              <h2 className="text-xl font-bold m-2">{item.title}</h2>
-              <p className="text-gray-600 m-2 mb-10">{item.category}</p>
-            </div>
-          ))
-          .slice(0, 4)}
-      </div>
+      <Card />
     </div>
   );
 }
