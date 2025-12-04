@@ -7,11 +7,10 @@ import { AiOutlineLoading } from "react-icons/ai";
 import { UserResource } from "@clerk/types";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
-import { UserType } from "@/lib/types";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { user, isLoaded } = useUser();
-  const [appUser, setAppUser] = useState<UserType | null>(null);
+  // const [appUser, setAppUser] = useState<UserType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
   const { getToken } = useAuth();
@@ -56,9 +55,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       const { data } = await response.json();
 
-      if (response.ok) {
-        setAppUser(data);
-      } else {
+      if (!response.ok) {
+        // setAppUser(data);
         toast.error(data?.message || "Failed to sync user!");
       }
     } catch (err) {
@@ -68,7 +66,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     }
   };
 
-  if (!isLoaded) {
+  if (!isLoaded || isLoading) {
     return (
       <div className="w-screen h-screen flex">
         <div className="w-full h-full flex items-center justify-center gap-1.5">

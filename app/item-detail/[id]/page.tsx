@@ -15,18 +15,20 @@ import Link from "next/link";
 import React from "react";
 async function getItems() {
   const response = await fetch("http://localhost:3000/api/items");
+  // console.log(response);
+
   const resData = await response.json();
+  // console.log(resData);
 
   return resData.data;
 }
-
-const items = await getItems();
 
 export default async function LostItemDetail({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
+  const items = await getItems();
   const dynamicParams = await params;
   const id = dynamicParams.id;
   const item = items.find((itm: itemType) => itm._id === id);

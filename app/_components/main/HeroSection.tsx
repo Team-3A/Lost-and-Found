@@ -17,7 +17,7 @@ export default async function HeroSection() {
         </div>
         <div className="max-w-4xl mx-auto text-center px-4">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">
-            Find What's Lost, Return What's Found
+            Find What&apos;s Lost, Return What&apos;s Found
           </h1>
           <p className="text-gray-600 max-w-xl mx-auto">
             Connect with your community to recover valuable items and bring

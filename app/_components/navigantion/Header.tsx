@@ -11,7 +11,7 @@ import {
   NavigationMenuContent,
   NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
-import { useIsMobile } from "../../hooks/use-mobile";
+import { useIsMobile } from "../../_hooks/use-mobile";
 
 import {
   Wallet,
