@@ -2,8 +2,9 @@ import { type Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Footer from "./components/navigantion/Footer";
-import { Header } from "./components/navigantion/Header";
+import Footer from "./_components/navigantion/Footer";
+import { Header } from "./_components/navigantion/Header";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,11 +31,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ClerkProvider>
-          <Header />
-          {children}
-          <Footer />
-        </ClerkProvider>
+        {" "}
+        <Suspense>
+          <ClerkProvider>
+            <Header />
+            {children}
+            <Footer />
+          </ClerkProvider>
+        </Suspense>
       </body>
     </html>
   );

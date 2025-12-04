@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { CloudUpload, Calendar, MapPin, Sun, Moon } from "lucide-react";
+import { CloudUpload, Calendar, MapPin, Sun } from "lucide-react";
 
 const THEMES = [
   { id: "default", label: "Sky (default)" },

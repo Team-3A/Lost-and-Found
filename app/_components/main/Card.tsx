@@ -1,14 +1,20 @@
 import { Badge } from "@/components/ui/badge";
 import { itemType } from "@/lib/types";
 import { MapPin } from "lucide-react";
+// import * from "../../api/items"
 
 import Link from "next/link";
 export default async function Card() {
   async function getItems() {
     const response = await fetch("http://localhost:3000/api/items");
-    const resData = await response.json();
 
-    return resData.data;
+    if (!response.ok) {
+      const txt = await response.text();
+      console.error("API ERROR:", txt);
+      throw new Error("API returned non-JSON response");
+    }
+
+    return (await response.json()).data;
   }
 
   const items = await getItems();

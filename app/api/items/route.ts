@@ -6,24 +6,19 @@ import { uploadImageToCloudinary } from "@/lib/uploadImage";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
-  const getAllItem = async () => {
+  try {
     await connectDB();
-    Item;
-    const allNewItem: ItemSchemaType[] = await Item.find();
-    return allNewItem;
-  };
-  const itemData = await getAllItem();
-  const response = NextResponse.json({ data: itemData }, { status: 200 });
-  response.headers.set("Access-Control-Allow-Origin", "*");
-  response.headers.set(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS"
-  );
-  response.headers.set(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Authorization"
-  );
-  return response;
+    const allNewItem = await Item.find();
+
+    return NextResponse.json({ data: allNewItem }, { status: 200 });
+  } catch (err: unknown) {
+    console.error("GET /api/items REAL ERROR:", err);
+
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
 }
 
 export async function POST(request: NextRequest) {
