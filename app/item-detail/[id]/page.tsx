@@ -14,27 +14,13 @@ import { MapPin } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 async function getItems() {
-  const res = await fetch("http://localhost:3000/api/lost", {
-    cache: "no-store",
-  });
+  const response = await fetch("http://localhost:3000/api/items");
+  const resData = await response.json();
 
-  if (!res.ok) {
-    console.error("API error:", res.status);
-    return [];
-  }
-
-  const json = await res.json().catch(() => null);
-
-  if (!json || !json.data) {
-    console.error("Invalid JSON returned");
-    return [];
-  }
-
-  return json.data;
+  return resData.data;
 }
 
 const items = await getItems();
-console.log({ items });
 
 export default async function LostItemDetail({
   params,
