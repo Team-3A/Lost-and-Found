@@ -5,23 +5,10 @@ import { MapPin } from "lucide-react";
 import Link from "next/link";
 export default async function Card() {
   async function getItems() {
-    const res = await fetch("http://localhost:3000/api/lost", {
-      cache: "no-store",
-    });
+    const response = await fetch("http://localhost:3000/api/items");
+    const resData = await response.json();
 
-    if (!res.ok) {
-      console.error("API error:", res.status);
-      return [];
-    }
-
-    const json = await res.json().catch(() => null);
-
-    if (!json || !json.data) {
-      console.error("Invalid JSON returned");
-      return [];
-    }
-
-    return json.data;
+    return resData.data;
   }
 
   const items = await getItems();
@@ -36,7 +23,8 @@ export default async function Card() {
               <div className="relative h-40 w-full">
                 <Badge
                   className="absolute flex m-2 flex-end "
-                  variant="destructive">
+                  variant="destructive"
+                >
                   {item.type}
                 </Badge>
                 <Badge className="absolute bg-white text-black mt-21 mr-2 top-10 right-0">
@@ -45,7 +33,8 @@ export default async function Card() {
                 <img
                   src={item.imageUrl}
                   alt={item.title}
-                  className="w-full h-40 object-cover rounded-t-2xl"></img>
+                  className="w-full h-40 object-cover rounded-t-2xl"
+                ></img>
               </div>
 
               <h2 className="text-xl font-bold m-2">{item.title}</h2>
@@ -62,7 +51,8 @@ export default async function Card() {
               <div className="relative h-40 w-full">
                 <Badge
                   className="absolute flex m-2 flex-end bg-green-400"
-                  variant="default">
+                  variant="default"
+                >
                   {item.type}
                 </Badge>
                 <Badge className="absolute bg-white text-black mt-21 mr-2 top-10 right-0">
@@ -71,7 +61,8 @@ export default async function Card() {
                 <img
                   src={item.imageUrl}
                   alt={item.title}
-                  className="w-full h-40 object-cover rounded-t-2xl"></img>
+                  className="w-full h-40 object-cover rounded-t-2xl"
+                ></img>
               </div>
 
               <h2 className="text-xl font-bold m-2">{item.title}</h2>
