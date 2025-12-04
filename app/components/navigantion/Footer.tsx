@@ -6,7 +6,6 @@ const Footer: React.FC = () => {
     <footer className="bg-white border-t border-gray-200 pt-16 pb-8 mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-          {/* Brand Section - Spans 5 columns */}
           <div className="md:col-span-5">
             <div className="flex items-center gap-2 mb-4">
               <div className="bg-blue-600 p-1.5 rounded-md">
@@ -48,9 +47,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Navigation Links - Spans remaining columns */}
           <div className="md:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-8">
-            {/* Column 1 */}
             <div>
               <h3 className="font-bold text-gray-900 mb-4">Sentinel Trace</h3>
               <ul className="space-y-3 text-sm text-gray-600">
@@ -77,7 +74,6 @@ const Footer: React.FC = () => {
               </ul>
             </div>
 
-            {/* Column 2 */}
             <div>
               <h3 className="font-bold text-gray-900 mb-4">Resources</h3>
               <ul className="space-y-3 text-sm text-gray-600">
@@ -99,7 +95,6 @@ const Footer: React.FC = () => {
               </ul>
             </div>
 
-            {/* Column 3 */}
             <div>
               <h3 className="font-bold text-gray-900 mb-4">Legal</h3>
               <ul className="space-y-3 text-sm text-gray-600">
@@ -118,7 +113,6 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Copyright Section */}
         <div className="border-t border-gray-200 mt-16 pt-8 text-center">
           <p className="text-gray-500 text-sm">
             &copy; 2025 Sentinel Trace. All rights reserved.
