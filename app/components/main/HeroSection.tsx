@@ -1,11 +1,10 @@
-// "use client";
-
 import { Input } from "@/components/ui/input";
 
 import { UserButton } from "@clerk/nextjs";
 
 import Link from "next/link";
 import Card from "./Card";
+import GoogleMaps from "./GoogleMaps";
 
 export default async function HeroSection() {
   return (
@@ -59,6 +58,7 @@ export default async function HeroSection() {
         Recently Found & Lost Items
       </h1>
       <Card />
+      <GoogleMaps />
     </div>
   );
 }
