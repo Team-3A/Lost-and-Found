@@ -31,20 +31,22 @@ export default async function HeroSection() {
             ></Input>
           </div>
 
-          <div className="flex items-center gap-3 mt-10 ml-60 ">
+          <div className="flex items-center gap-3  mt-10 justify-center">
             <Link
               href="/report-lost"
-              className="flex items-center w-[200px] h-11 pl-6 rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow"
+              className="flex items-center max-w-50 h-11 pl-6 rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow"
             >
-              <img
-                src="add.png"
-                alt="Lost Item"
-                className="object-cover rounded w-5 h-5"
-              />
+              <div className="flex pr-3">
+                <img
+                  src="add.png"
+                  alt="Lost Item"
+                  className="object-cover rounded w-5 h-5"
+                />
 
-              <span className="ml-3 font-semibold text-sm ">
-                Report Lost Item
-              </span>
+                <span className="ml-3 font-semibold text-sm ">
+                  Report Lost Item
+                </span>
+              </div>
             </Link>
 
             <Link
@@ -56,10 +58,14 @@ export default async function HeroSection() {
           </div>
         </div>
       </section>
-      <h1 className="text-4xl flex justify-center items-center font-semibold">
+      <h1 className="text-4xl flex justify-center items-center font-semibold ">
         Recently Found & Lost Items
       </h1>
       <Card />
     </div>
   );
 }
+
+// red lorry yellow lorry
+// red lorry yellow lorry
+// red lorry yellow lorry
