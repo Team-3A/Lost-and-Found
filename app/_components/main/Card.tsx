@@ -20,22 +20,25 @@ export default async function Card() {
   const items = await getItems();
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 mx-auto max-w-5xl gap-5 bg-white mt-16 ">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 mx-auto max-w-5xl gap-5 bg-white mt-16  ">
       {items
         .filter((item: itemType) => item.type === "lost")
         .map((item: itemType) => (
           <Link key={item._id} href={`/item-detail/${item._id}`}>
-            <div className="border rounded-2xl shadow-md">
-              <div className="relative h-40 w-full">
+            <div className="border rounded-2xl shadow-md w-60 h-75">
+              <div className="relative h-40 w-60">
                 <Badge
                   className="absolute flex m-2 flex-end "
                   variant="destructive"
                 >
                   {item.type}
                 </Badge>
-                <Badge className="absolute bg-white text-black mt-21 mr-2 top-10 right-0">
-                  <MapPin className="w-4 h-4" /> {item.location}
+
+                <Badge className="absolute bottom-2 right-2 whitespace-normal bg-white text-black h-auto leading-tight">
+                  <MapPin className="w-4 h-4" />
+                  {item.location}
                 </Badge>
+
                 <img
                   src={item.imageUrl}
                   alt={item.title}
@@ -54,7 +57,7 @@ export default async function Card() {
         .map((item: itemType) => (
           <Link key={item._id} href={`/item-detail/${item._id}`}>
             <div className="border rounded-2xl shadow-md">
-              <div className="relative h-40 w-full">
+              <div className="relative h-40 w-">
                 <Badge
                   className="absolute flex m-2 flex-end bg-green-400"
                   variant="default"
@@ -67,7 +70,7 @@ export default async function Card() {
                 <img
                   src={item.imageUrl}
                   alt={item.title}
-                  className="w-full h-40 object-cover rounded-t-2xl"
+                  className="w-60 h-40 object-cover rounded-t-2xl"
                 ></img>
               </div>
 
