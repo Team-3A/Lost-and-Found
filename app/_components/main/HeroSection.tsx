@@ -8,8 +8,21 @@ import Link from "next/link";
 import Card from "./Card";
 
 export default async function HeroSection() {
+  async function getItems() {
+    const response = await fetch("http://localhost:3000/api/items");
+
+    if (!response.ok) {
+      const txt = await response.text();
+      console.error("API ERROR:", txt);
+      throw new Error("API returned non-JSON response");
+    }
+
+    return (await response.json()).data;
+  }
+
+  const items = await getItems();
   return (
-    <div className=" bg-gradient-to-b from-sky-100 via-blue-300 to-white">
+    <div className=" bg-linear-to-b from-sky-100 via-blue-300 to-white">
       {/* <section className="w-full py-20 bg-linear-to-b from-[#CDE4FF] to-white"> */}
       <section className="w-full py-20">
         <div className="absolute top-2 right-4">
@@ -58,14 +71,13 @@ export default async function HeroSection() {
           </div>
         </div>
       </section>
-      <h1 className="text-4xl flex justify-center items-center font-semibold ">
-        Recently Found & Lost Items
-      </h1>
-      <Card />
+
+      <div className="w-full h-auto bg-white mx-auto flex flex-col gap-10">
+        <h1 className="text-4xl flex justify-center items-center font-semibold  mt-20">
+          Recently Found & Lost Items
+        </h1>
+        <Card />
+      </div>
     </div>
   );
 }
-
-// red lorry yellow lorry
-// red lorry yellow lorry
-// red lorry yellow lorry
