@@ -24,6 +24,7 @@ import {
   Gem,
   PawPrint,
   Box,
+  Menu,
 } from "lucide-react";
 
 import {
@@ -36,6 +37,8 @@ import {
 } from "@clerk/nextjs";
 
 import { SearchBar } from "../search/SearchBar";
+import React from "react";
+import { ResponsiveMenu } from "./ResponsiveMenu";
 
 export function Header() {
   const isMobile = useIsMobile();
@@ -102,13 +105,14 @@ export function Header() {
       description: "Miscellaneous items",
     },
   ];
+  const [open, setOpen] = React.useState(false);
 
   return (
     <header className="w-full border-b bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
       <div className="mx-auto flex items-center justify-between px-4 py-3 max-w-7xl">
         <div className="flex items-center gap-2 cursor-pointer hover:opacity-90 transition">
           <Image src="/location.png" alt="logo" width={32} height={32} />
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+          <h2 className="text-2xl font-bold from-blue-600 to-indigo-600 bg-clip-text text-transparent">
             Sentinel Trace
           </h2>
         </div>
@@ -167,7 +171,7 @@ export function Header() {
                   <ul className="grid gap-3 p-4 w-[250px]">
                     <li className="row-span-3">
                       <NavigationMenuLink asChild>
-                        <div className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-blue-500 to-indigo-600 p-6 no-underline outline-none focus:shadow-md">
+                        <div className="flex h-full w-full select-none flex-col justify-end rounded-md from-blue-500 to-indigo-600 p-6 no-underline outline-none focus:shadow-md">
                           <div className="mb-2 mt-4 text-lg font-medium text-white">
                             Lost something?
                           </div>
@@ -224,12 +228,18 @@ export function Header() {
             <SearchBar />
           </div>
 
+          <div className="relative block sm:hidden">
+            <IoSearch className="absolute left-2.5 top-2.5 text-gray-400" />
+
+            <SearchBar />
+          </div>
+
           <div className="flex gap-3 items-center">
             <ClerkProvider>
               <SignedOut>
                 <SignInButton />
                 <SignUpButton>
-                  <button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-full font-medium text-sm h-9 px-5 transition shadow-sm hover:shadow-md">
+                  <button className="from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-full font-medium text-sm h-9 px-5 transition shadow-sm hover:shadow-md">
                     Sign Up
                   </button>
                 </SignUpButton>
@@ -239,6 +249,10 @@ export function Header() {
               </SignedIn>
             </ClerkProvider>
           </div>
+          <div className="md:hidden ">
+            <Menu className="text-4xl" onClick={() => setOpen(!open)} />
+          </div>
+          <ResponsiveMenu open={open} />
         </div>
       </div>
     </header>

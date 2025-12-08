@@ -22,60 +22,62 @@ export default async function HeroSection() {
 
   const items = await getItems();
   return (
-    <div className=" bg-linear-to-b from-sky-100 via-blue-300 to-white">
-      {/* <section className="w-full py-20 bg-linear-to-b from-[#CDE4FF] to-white"> */}
-      <section className="w-full py-20">
-        <div className="absolute top-2 right-4">
-          <UserButton />
-        </div>
-        <div className="max-w-4xl mx-auto text-center px-4">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">
-            Find What&apos;s Lost, Return What&apos;s Found
-          </h1>
-          <p className="text-gray-600 max-w-xl mx-auto">
-            Connect with your community to recover valuable items and bring
-            peace of mind.
-          </p>
-
-          <div>
-            <Input
-              placeholder="Search lost/found items..."
-              className="w-[570px] text-[14px] pl-10 border-[#E1E1FF] border-solid rounded-md mt-30 bg-white h-10"
-            ></Input>
+    <div>
+      <div className=" bg-linear-to-b from-sky-100 via-blue-300 to-white ">
+        {/* <section className="w-full py-20 bg-linear-to-b from-[#CDE4FF] to-white"> */}
+        <section className="w-full py-20">
+          <div className="absolute top-2 right-4">
+            <UserButton />
           </div>
+          <div className="max-w-4xl mx-auto text-center px-4">
+            <h1 className="text-4xl font-bold text-gray-800 mb-4">
+              Find What&apos;s Lost, Return What&apos;s Found
+            </h1>
+            <p className="text-gray-600 max-w-xl mx-auto">
+              Connect with your community to recover valuable items and bring
+              peace of mind.
+            </p>
 
-          <div className="flex items-center gap-3  mt-10 justify-center">
-            <Link
-              href="/report-lost"
-              className="flex items-center max-w-50 h-11 pl-6 rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow"
-            >
-              <div className="flex pr-3">
-                <img
-                  src="add.png"
-                  alt="Lost Item"
-                  className="object-cover rounded w-5 h-5"
-                />
+            <div>
+              <Input
+                placeholder="Search lost/found items..."
+                className="max-w-[570px] text-[14px] pl-10 border-[#E1E1FF] border-solid rounded-md mt-30 bg-white h-10"
+              ></Input>
+            </div>
 
-                <span className="ml-3 font-semibold text-sm ">
-                  Report Lost Item
-                </span>
-              </div>
-            </Link>
+            <div className="flex items-center gap-3  mt-10 justify-center">
+              <Link
+                href="/report-lost"
+                className="flex items-center max-w-50 h-11 pl-6 rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow"
+              >
+                <div className="flex pr-3">
+                  <img
+                    src="add.png"
+                    alt="Lost Item"
+                    className="object-cover rounded w-5 h-5"
+                  />
 
-            <Link
-              href="/report-found"
-              className="px-4 py-2 w-[200px] h-11 pt-3  rounded-lg border border-blue-600 text-blue-600 text-sm font-medium hover:bg-blue-50 transition bg-white"
-            >
-              Report Found Item
-            </Link>
+                  <span className="ml-3 font-semibold text-sm ">
+                    Report Lost Item
+                  </span>
+                </div>
+              </Link>
+
+              <Link
+                href="/report-found"
+                className="px-4 py-2 w-[200px] h-11 pt-3  rounded-lg border border-blue-600 text-blue-600 text-sm font-medium hover:bg-blue-50 transition bg-white"
+              >
+                Report Found Item
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
-
+        </section>
+      </div>
       <div className="w-full h-auto bg-white mx-auto flex flex-col gap-10">
-        <h1 className="text-4xl flex justify-center items-center font-semibold  mt-20">
+        <h1 className="sm:text-3xl md:text-4xl flex justify-center items-center font-semibold  mt-20">
           Recently Found & Lost Items
         </h1>
+
         <Card />
       </div>
     </div>

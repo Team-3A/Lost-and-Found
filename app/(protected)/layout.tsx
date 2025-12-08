@@ -80,7 +80,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="w-screen h-screen flex flex-col">
+    <div className="w-screen flex flex-col">
       <>
         {children}
         <Toaster position="top-center" />
