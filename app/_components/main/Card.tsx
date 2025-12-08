@@ -17,7 +17,7 @@ export default async function Card() {
   const foundItems = items.filter((i: itemType) => i.type === "found");
 
   return (
-    <div className="w-5xl mx-auto flex flex-col gap-10 mb-20 overflow-hidden">
+    <div className="w-[400px] sm:w-5xl mx-auto flex flex-col gap-10 overflow-hidden">
       <Marquee pauseOnHover className="gap-5 [--duration:20s]">
         {lostItems.map((item: itemType) => (
           <Link key={item._id} href={`/item-detail/${item._id}`}>
@@ -73,8 +73,8 @@ export default async function Card() {
           </Link>
         ))}
       </Marquee>
-      <div className="from-background pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r"></div>
-      <div className="from-background pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l"></div>
+      {/* <div className="from-background pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r"></div> */}
+      {/* <div className="from-background pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l"></div> */}
     </div>
   );
 }

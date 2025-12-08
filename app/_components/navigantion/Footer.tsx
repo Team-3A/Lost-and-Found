@@ -3,7 +3,7 @@ import { Facebook, Twitter, Instagram, Linkedin, MapPin } from "lucide-react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-white border-t border-gray-200 pt-16 pb-8 mt-40">
+    <footer className="bg-white border-t border-gray-200 pt-16 pb-8 mt-30 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           <div className="md:col-span-5">
