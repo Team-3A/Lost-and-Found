@@ -28,6 +28,7 @@ import {
   Gem,
   PawPrint,
   Box,
+  Menu,
 } from "lucide-react";
 
 import {
@@ -38,6 +39,10 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
+
+import { SearchBar } from "../search/SearchBar";
+import React from "react";
+import { ResponsiveMenu } from "./ResponsiveMenu";
 
 export function Header() {
   const router = useRouter();
@@ -109,6 +114,7 @@ export function Header() {
       description: "Miscellaneous items",
     },
   ];
+  const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
     const delay = setTimeout(() => {
@@ -139,7 +145,7 @@ export function Header() {
       <div className="mx-auto flex items-center justify-between px-4 py-3 max-w-7xl">
         <div className="flex items-center gap-2 cursor-pointer hover:opacity-90 transition">
           <Image src="/location.png" alt="logo" width={32} height={32} />
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+          <h2 className="text-2xl font-bold from-blue-600 to-indigo-600 bg-clip-text text-transparent">
             Sentinel Trace
           </h2>
         </div>
