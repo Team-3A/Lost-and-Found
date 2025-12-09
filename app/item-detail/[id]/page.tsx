@@ -50,7 +50,6 @@ export default async function LostItemDetail({
             <img className="w-23 h-20 rounded-2xl" src={item.imageUrl} />
             <img className="w-23 h-20 rounded-2xl" src={item.imageUrl} />
             <img className="w-23 h-20 rounded-2xl" src={item.imageUrl} />
-            <img className="w-23 h-20 rounded-2xl" src={item.imageUrl} />
           </div>
         </div>
         <div>

@@ -1,18 +1,26 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Marquee } from "@/components/ui/marquee";
 
 import { itemType } from "@/lib/types";
 import { MapPin } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export default async function Card() {
+export default function Card() {
+  const [items, setItems] = useState<itemType[]>([]);
+
+  useEffect(() => {
+    getItems().then((data) => setItems(data));
+  }, []);
+
   async function getItems() {
-    const response = await fetch("http://localhost:3000/api/items");
+    const response = await fetch("/api/items");
     if (!response.ok) throw new Error("Failed to load items");
     return (await response.json()).data;
   }
 
-  const items = await getItems();
   const lostItems = items.filter((i: itemType) => i.type === "lost");
   const foundItems = items.filter((i: itemType) => i.type === "found");
 
