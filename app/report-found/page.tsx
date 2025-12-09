@@ -266,7 +266,7 @@ export default function ReportFoundThemes() {
                   <label
                     className={`flex items-center gap-2 text-sm font-medium mb-2 ${textColor}`}
                   >
-                    <Calendar className="w-4 h-4 text-sky-500" /> Date lost
+                    <Calendar className="w-4 h-4 text-sky-500" /> Date found
                   </label>
                   <input
                     type="date"
@@ -324,7 +324,7 @@ export default function ReportFoundThemes() {
                     Phone
                   </label>
                   <Input
-                    type="tel"
+                    type="number"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+976 99 123456"

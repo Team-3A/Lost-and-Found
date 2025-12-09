@@ -9,7 +9,6 @@ export default async function HeroSection() {
   return (
     <div>
       <div className=" bg-linear-to-b from-sky-100 via-blue-300 to-white ">
-        {/* <section className="w-full py-20 bg-linear-to-b from-[#CDE4FF] to-white"> */}
         <section className="w-full py-20">
           <div className="absolute top-2 right-4">
             <UserButton />
