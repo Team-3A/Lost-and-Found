@@ -28,7 +28,6 @@ import {
   Gem,
   PawPrint,
   Box,
-  Menu,
 } from "lucide-react";
 
 import {
@@ -40,16 +39,15 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 
-import { SearchBar } from "../search/SearchBar";
 import React from "react";
-import { ResponsiveMenu } from "./ResponsiveMenu";
+import { itemType } from "@/lib/types";
 
 export function Header() {
   const router = useRouter();
   const isMobile = useIsMobile();
 
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<itemType[]>([]);
   const [isOpen, setIsOpen] = useState(false);
 
   const categories = [
