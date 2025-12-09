@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { CloudUpload, Calendar, MapPin, Sun } from "lucide-react";
+import { useAuth } from "@clerk/nextjs";
 
 const THEMES = [
   { id: "default", label: "Sky (default)" },
@@ -33,8 +34,10 @@ export default function ReportFoundThemes() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState<number | string>("");
   const [image, setImage] = useState<File | null>(null);
+  const { getToken } = useAuth();
 
   const handleSubmit = async () => {
+    const token = await getToken();
     const formData = new FormData();
     formData.append("type", "found");
     formData.append("title", title);
@@ -48,6 +51,10 @@ export default function ReportFoundThemes() {
     const res = await fetch("/api/items", {
       method: "POST",
       body: formData,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "X-App-Client": "sentinel-trace",
+      },
     });
 
     const data = await res.json();
