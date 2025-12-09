@@ -36,7 +36,7 @@ export default function ReportFoundThemes() {
 
   const handleSubmit = async () => {
     const formData = new FormData();
-    formData.append("type", "lost");
+    formData.append("type", "found");
     formData.append("title", title);
     formData.append("desc", desc);
     formData.append("category", category);
