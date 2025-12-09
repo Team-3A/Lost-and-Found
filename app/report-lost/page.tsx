@@ -231,7 +231,7 @@ export default function ReportLostThemes() {
                   >
                     <MapPin className="w-4 h-4 text-sky-500" /> Location
                   </label>
-                  <div className={`text-xs flex ${muted}`}>Step 2 of 3</div>
+                  {/* <div className={`text-xs flex ${muted}`}>Step 2 of 3</div> */}
 
                   <Input
                     value={location}
@@ -240,6 +240,8 @@ export default function ReportLostThemes() {
                     className="rounded-lg"
                   />
                 </div>
+
+                <div></div>
 
                 <div>
                   <label
