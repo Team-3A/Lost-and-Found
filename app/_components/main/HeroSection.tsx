@@ -1,26 +1,11 @@
 // "use client";
 
 import { Input } from "@/components/ui/input";
-
 import { UserButton } from "@clerk/nextjs";
-
 import Link from "next/link";
 import Card from "./Card";
 
 export default async function HeroSection() {
-  async function getItems() {
-    const response = await fetch("http://localhost:3000/api/items");
-
-    if (!response.ok) {
-      const txt = await response.text();
-      console.error("API ERROR:", txt);
-      throw new Error("API returned non-JSON response");
-    }
-
-    return (await response.json()).data;
-  }
-
-  const items = await getItems();
   return (
     <div>
       <div className=" bg-linear-to-b from-sky-100 via-blue-300 to-white ">
@@ -74,7 +59,7 @@ export default async function HeroSection() {
         </section>
       </div>
       <div className="w-full h-auto bg-white mx-auto flex flex-col gap-10">
-        <h1 className="sm:text-3xl md:text-4xl flex justify-center items-center font-semibold  mt-20">
+        <h1 className="sm:text-xl md:text-4xl flex justify-center items-center font-semibold  mt-20">
           Recently Found & Lost Items
         </h1>
 

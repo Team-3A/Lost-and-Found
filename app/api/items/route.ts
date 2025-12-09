@@ -10,6 +10,8 @@ export async function GET() {
     await connectDB();
     const allNewItem = await Item.find();
 
+    console.log({ allNewItem });
+
     return NextResponse.json({ data: allNewItem }, { status: 200 });
   } catch (err: unknown) {
     console.error("GET /api/items REAL ERROR:", err);
