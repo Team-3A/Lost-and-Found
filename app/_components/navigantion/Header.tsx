@@ -1,8 +1,12 @@
 "use client";
 
-import { IoSearch } from "react-icons/io5";
-import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
+import { IoSearch } from "react-icons/io5";
+import { Input } from "@/components/ui/input";
+
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -35,10 +39,13 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 
-import { SearchBar } from "../search/SearchBar";
-
 export function Header() {
+  const router = useRouter();
   const isMobile = useIsMobile();
+
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState<any[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   const categories = [
     {
@@ -103,6 +110,30 @@ export function Header() {
     },
   ];
 
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      if (query.trim().length > 0) {
+        fetch(`/api/items?q=${query}`)
+          .then((res) => res.json())
+          .then((data) => {
+            setResults(data.data || []);
+            setIsOpen(true);
+          });
+      } else {
+        setResults([]);
+        setIsOpen(false);
+      }
+    }, 300);
+
+    return () => clearTimeout(delay);
+  }, [query]);
+
+  const handleSelect = (id: string) => {
+    setIsOpen(false);
+    router.push(`/item-detail/${id}`);
+    // detail page ruu shiljih
+  };
+
   return (
     <header className="w-full border-b bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
       <div className="mx-auto flex items-center justify-between px-4 py-3 max-w-7xl">
@@ -138,16 +169,14 @@ export function Header() {
                         <NavigationMenuLink asChild>
                           <Link
                             href={item.href}
-                            className="flex items-start gap-3 select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 group"
+                            className="flex items-start gap-3 select-none rounded-md p-3 transition-colors hover:bg-blue-50 group"
                           >
-                            <div className="mt-1 p-1 bg-gray-100 rounded-md group-hover:bg-white group-hover:text-blue-600 transition">
-                              <item.icon className="h-5 w-5 text-gray-500 group-hover:text-blue-600" />
-                            </div>
-                            <div className="flex flex-col gap-1">
-                              <div className="text-sm font-semibold leading-none">
+                            <item.icon className="h-5 w-5 text-gray-500 group-hover:text-blue-700" />
+                            <div>
+                              <div className="text-sm font-semibold">
                                 {item.name}
                               </div>
-                              <p className="line-clamp-2 text-xs leading-snug text-muted-foreground group-hover:text-blue-600/70">
+                              <p className="text-xs text-gray-500 group-hover:text-blue-600">
                                 {item.description}
                               </p>
                             </div>
@@ -158,7 +187,6 @@ export function Header() {
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
-
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="text-[15px] font-medium text-gray-700 bg-transparent hover:bg-gray-100/50">
                   Submit Item
@@ -167,7 +195,7 @@ export function Header() {
                   <ul className="grid gap-3 p-4 w-[250px]">
                     <li className="row-span-3">
                       <NavigationMenuLink asChild>
-                        <div className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-blue-500 to-indigo-600 p-6 no-underline outline-none focus:shadow-md">
+                        <div className="flex h-full w-full select-none flex-col justify-end rounded-md from-blue-500 to-indigo-600 p-6 no-underline outline-none focus:shadow-md">
                           <div className="mb-2 mt-4 text-lg font-medium text-white">
                             Lost something?
                           </div>
@@ -215,30 +243,58 @@ export function Header() {
         )}
 
         <div className="flex gap-4 items-center">
-          <div className="relative hidden md:block">
+          <div className="relative hidden md:block w-[220px]">
             <IoSearch className="absolute left-2.5 top-2.5 text-gray-400" />
-            {/* <Input
-              className="pl-9 w-[200px] bg-gray-50 border-gray-200 focus:bg-white transition-all rounded-full h-9 text-sm"
+            <Input
+              className="pl-9 bg-gray-50 border-gray-200 focus:bg-white rounded-full h-9 text-sm"
               placeholder="Search..."
-            /> */}
-            <SearchBar />
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onFocus={() => query.length > 0 && setIsOpen(true)}
+            />
+
+            {isOpen && results.length > 0 && (
+              <div className="absolute w-full mt-2 bg-white shadow-lg border rounded-xl py-2 max-h-64 overflow-auto z-50">
+                {results.map((item) => (
+                  <div
+                    key={item._id}
+                    onClick={() => handleSelect(item._id)}
+                    className="flex gap-2 px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                  >
+                    {item.imageUrl && (
+                      <img
+                        src={item.imageUrl}
+                        alt={item.title}
+                        width={40}
+                        height={40}
+                        className="object-cover rounded-md"
+                      />
+                    )}
+                    <div className="flex flex-col">
+                      <p className="text-sm font-medium">{item.title}</p>
+                      <p className="text-xs text-gray-500 line-clamp-1">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
-          <div className="flex gap-3 items-center">
-            <ClerkProvider>
-              <SignedOut>
-                <SignInButton />
-                <SignUpButton>
-                  <button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-full font-medium text-sm h-9 px-5 transition shadow-sm hover:shadow-md">
-                    Sign Up
-                  </button>
-                </SignUpButton>
-              </SignedOut>
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
-            </ClerkProvider>
-          </div>
+          <ClerkProvider>
+            <SignedOut>
+              <SignInButton />
+              <SignUpButton>
+                <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full text-sm h-9 px-5 shadow-sm hover:shadow-md">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </ClerkProvider>
         </div>
       </div>
     </header>

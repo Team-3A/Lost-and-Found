@@ -10,7 +10,7 @@ export default async function Card() {
 
     if (!response.ok) {
       const txt = await response.text();
-      console.error("API ERROR:", txt);
+      console.log("API ERROR:", txt);
       throw new Error("API returned non-JSON response");
     }
 
