@@ -59,7 +59,7 @@ export default async function HeroSection() {
         </section>
       </div>
       <div className="w-full h-auto bg-white mx-auto flex flex-col gap-10">
-        <h1 className="sm:text-xl md:text-4xl flex justify-center items-center font-semibold  mt-20">
+        <h1 className="sm:text-3xl md:text-4xl flex justify-center items-center font-semibold  mt-20">
           Recently Found & Lost Items
         </h1>
 
