@@ -22,3 +22,10 @@ export type itemType = {
   createdAt: string;
   updatedAt: string;
 };
+export type userType = {
+  clerkId: string;
+  email: string;
+  name: string;
+  profileImage: string;
+  phoneNumber: string;
+};
