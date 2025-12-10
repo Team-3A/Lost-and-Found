@@ -110,7 +110,7 @@ export default async function LostItemDetail({
         Approximate location where the item was last seen.
       </h6>
       <h1 className="text-3xl mt-20 font-semibold">Related Items</h1>
-      <div className="flex gap-4 mt-10 mb-10">
+      <div className="gap-4 mt-10 mb-10 grid grid-cols-1 md:grid-cols-4">
         {items
           .filter((itm: itemType) => item.category == itm.category)
           .map((itm: itemType) => (
