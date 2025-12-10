@@ -16,6 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
+import { EditUserDialog } from "../_components/main/EditUserDialog";
 
 export default function UserPage() {
   const { user } = useUser();
@@ -156,7 +157,8 @@ export default function UserPage() {
                     variant="default"
                     className={
                       item.type === "lost" ? "bg-red-500" : "bg-blue-500"
-                    }>
+                    }
+                  >
                     {item.type}
                   </Badge>
                 </div>
@@ -171,9 +173,8 @@ export default function UserPage() {
                 <p className="text-gray-700">{item.desc}</p>
 
                 <div className="flex gap-4 pt-3">
-                  <Button variant="link" className="text-blue-600 px-0">
-                    Edit
-                  </Button>
+                  <EditUserDialog id={item._id} />
+
                   <Button variant="link" className="text-red-600 px-0">
                     Delete
                   </Button>
