@@ -21,6 +21,7 @@ export type itemType = {
   clerkId: string;
   createdAt: string;
   updatedAt: string;
+  date: string;
 };
 export type userType = {
   clerkId: string;

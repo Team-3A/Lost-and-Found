@@ -2,10 +2,10 @@ import mongoose, { Schema } from "mongoose";
 export type ItemSchemaType = {
   type: string;
   title: string;
-  description: string;
+  desc: string;
   category: string;
   location: string;
-  date: Date;
+  date: string;
   imageUrl: string;
   email: string;
   phone: number;
@@ -17,7 +17,7 @@ const ItemSchema = new Schema({
   desc: String,
   category: String,
   location: String,
-  date: Date,
+  date: String,
   imageUrl: String,
   email: String,
   phone: Number,

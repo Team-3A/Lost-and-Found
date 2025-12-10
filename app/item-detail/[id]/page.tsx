@@ -45,11 +45,23 @@ export default async function LostItemDetail({
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="rounded-2xl border  h-fit shadow-ls">
-          <img className="w-180 rounded-t-2xl" src={item.imageUrl} />
+          <img
+            className="w-180 rounded-t-2xl"
+            src={item.imageUrl || "skeleton.png"}
+          />
           <div className="flex gap-4 mt-5 mb-3 ml-3">
-            <img className="w-23 h-20 rounded-2xl" src={item.imageUrl} />
-            <img className="w-23 h-20 rounded-2xl" src={item.imageUrl} />
-            <img className="w-23 h-20 rounded-2xl" src={item.imageUrl} />
+            <img
+              className="w-23 h-20 rounded-2xl"
+              src={item.imageUrl || "skeleton.png"}
+            />
+            <img
+              className="w-23 h-20 rounded-2xl"
+              src={item.imageUrl || "skeleton.png"}
+            />
+            <img
+              className="w-23 h-20 rounded-2xl"
+              src={item.imageUrl || "skeleton.png"}
+            />
           </div>
         </div>
         <div>
@@ -127,7 +139,7 @@ export default async function LostItemDetail({
                     <MapPin className="w-4 h-4" /> {itm.location}
                   </Badge>
                   <img
-                    src={itm.imageUrl}
+                    src={itm.imageUrl || "skeleton.png"}
                     alt={itm.title}
                     className="w-full h-40 object-cover rounded-t-2xl"
                   ></img>
