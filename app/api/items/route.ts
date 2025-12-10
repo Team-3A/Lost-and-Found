@@ -121,7 +121,7 @@ export async function DELETE(req: NextRequest) {
 
     return NextResponse.json({ message: "Food deleted" }, { status: 200 });
   } catch (error) {
-    console.error("DELETE /api/categories error:", error);
+    console.error("DELETE /api/items/[id] error:", error);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

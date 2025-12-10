@@ -25,7 +25,7 @@ export async function GET(
   await connectDB();
 
   try {
-    const { id } = params;
+    const { id } = await params;
     if (!id) {
       const res = NextResponse.json(
         { error: "Item ID required" },
@@ -59,7 +59,7 @@ export async function PATCH(
   await connectDB();
 
   try {
-    const { id } = params;
+    const { id } = await params;
     if (!id) {
       const res = NextResponse.json(
         { error: "Item ID required" },
@@ -129,59 +129,6 @@ export async function PATCH(
     return setCors(res);
   } catch (error) {
     console.error("PATCH /api/items/[id] error:", error);
-    const res = NextResponse.json({ error: "Server error" }, { status: 500 });
-    return setCors(res);
-  }
-}
-
-export async function DELETE(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  await connectDB();
-
-  try {
-    const { id } = params;
-    if (!id) {
-      const res = NextResponse.json(
-        { error: "Item ID required" },
-        { status: 400 }
-      );
-      return setCors(res);
-    }
-
-    // auth
-    const authHeader = req.headers.get("authorization") ?? "";
-    const authToken = authHeader.split(" ")[1];
-    if (!authToken) {
-      return NextResponse.json(
-        { error: "Unauthorized: missing token" },
-        { status: 401 }
-      );
-    }
-    const { sub } = await verifyToken(authToken, {
-      secretKey: process.env.CLERK_SECRET_KEY,
-    });
-    const clerkId = sub;
-
-    const existing = await Item.findById(id);
-    if (!existing) {
-      const res = NextResponse.json(
-        { error: "Item not found" },
-        { status: 404 }
-      );
-      return setCors(res);
-    }
-
-    if (existing.clerkId && existing.clerkId !== clerkId) {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
-
-    await Item.findByIdAndDelete(id);
-    const res = NextResponse.json({ message: "Item deleted" }, { status: 200 });
-    return setCors(res);
-  } catch (error) {
-    console.error("DELETE /api/items/[id] error:", error);
     const res = NextResponse.json({ error: "Server error" }, { status: 500 });
     return setCors(res);
   }

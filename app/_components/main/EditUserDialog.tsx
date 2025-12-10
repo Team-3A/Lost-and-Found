@@ -12,29 +12,20 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Pen, Trash } from "lucide-react";
 
-type EditUserDialogProps = {
+export const EditUserDialog = ({
+  id,
+  refetchItems,
+}: {
   id: string;
-};
-
-export const EditUserDialog = ({ id }: EditUserDialogProps) => {
+  refetchItems: () => Promise<void>;
+}) => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [phone, setPhone] = useState<number | string>("");
   const [image, setImage] = useState<File | null>(null);
-
-  // Load existing item
-  useEffect(() => {
-    async function load() {
-      const res = await fetch(`/api/items/${id}`);
-      const data = await res.json();
-
-      setTitle(data.title);
-      setDesc(data.desc);
-      setPhone(data.phone);
-    }
-    load();
-  }, [id]);
-
+  const [category, setCategory] = useState("");
+  const [location, setLocation] = useState("");
+  const [email, setEmail] = useState("");
   // --- Handlers ---
   const titleChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
     setTitle(e.target.value);
@@ -50,17 +41,21 @@ export const EditUserDialog = ({ id }: EditUserDialogProps) => {
   };
 
   // --- PATCH update ---
-  const editItemHandler = async () => {
-    const form = new FormData();
+  const editItemHandler = async (id: string) => {
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("type", "found");
+    formData.append("title", title);
+    formData.append("desc", desc);
+    formData.append("category", category);
+    formData.append("location", location);
+    formData.append("email", email);
+    formData.append("phone", String(phone));
+    if (image) formData.append("image", image);
 
-    form.append("title", title);
-    form.append("desc", desc);
-    form.append("phone", phone.toString());
-    if (image) form.append("image", image);
-
-    const res = await fetch(`/api/items/${id}`, {
+    const res = await fetch(`/api/items`, {
       method: "PATCH",
-      body: form,
+      body: formData,
     });
 
     if (!res.ok) return alert("Failed to update item");
@@ -70,14 +65,16 @@ export const EditUserDialog = ({ id }: EditUserDialogProps) => {
   };
 
   // --- DELETE item ---
-  const deleteItemHandler = async () => {
-    const res = await fetch(`/api/items/${id}`, {
-      method: "DELETE",
-    });
-    if (!res.ok) return alert("Failed to delete");
 
-    alert("Deleted successfully!");
-    window.location.reload();
+  const deleteItemHandler = async (id: string) => {
+    await fetch("/api/items", {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
+    await refetchItems();
   };
 
   return (
@@ -132,12 +129,13 @@ export const EditUserDialog = ({ id }: EditUserDialogProps) => {
           <Button
             variant="outline"
             className="bg-white border border-red-500"
-            onClick={deleteItemHandler}
-          >
+            onClick={() => deleteItemHandler(id)}>
             <Trash color="red" />
           </Button>
 
-          <Button onClick={editItemHandler}>Save changes</Button>
+          <Button onClick={() => editItemHandler(id)} type="submit">
+            Save changes
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

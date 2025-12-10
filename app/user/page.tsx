@@ -31,11 +31,11 @@ export default function UserPage() {
     getItems().then((data) => setItems(data));
   }, []);
 
-  async function getItems() {
+  const getItems = async function () {
     const response = await fetch("/api/items");
     if (!response.ok) throw new Error("Failed to load items");
     return (await response.json()).data;
-  }
+  };
 
   // Filter user items
   const yourItems = items.filter((i) => i.clerkId === clerkId);
@@ -157,8 +157,7 @@ export default function UserPage() {
                     variant="default"
                     className={
                       item.type === "lost" ? "bg-red-500" : "bg-blue-500"
-                    }
-                  >
+                    }>
                     {item.type}
                   </Badge>
                 </div>
@@ -173,7 +172,7 @@ export default function UserPage() {
                 <p className="text-gray-700">{item.desc}</p>
 
                 <div className="flex gap-4 pt-3">
-                  <EditUserDialog id={item._id} />
+                  <EditUserDialog id={item._id} refetchItems={getItems} />
 
                   <Button variant="link" className="text-red-600 px-0">
                     Delete
