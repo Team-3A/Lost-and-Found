@@ -2,6 +2,8 @@ import Item from "@/lib/models/Item";
 import { connectDB } from "@/lib/mongodb";
 import { createItem } from "@/lib/services/item-service";
 import { uploadImageToCloudinary } from "@/lib/uploadImage";
+import { verifyToken } from "@clerk/backend";
+import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -83,6 +85,18 @@ export async function GET(req: NextRequest) {
 //   }
 // }
 export async function POST(request: NextRequest) {
+  const headersList = await headers();
+  const authorization = headersList.get("Authorization");
+  const authToken = authorization?.split(" ")[1];
+  console.log({ authToken });
+
+  if (!authToken) {
+    return Response.json({});
+  }
+  const { sub } = await verifyToken(authToken, {
+    secretKey: process.env.CLERK_SECRET_KEY,
+  });
+  const clerkId = sub;
   const formData = await request.formData();
 
   const type = formData.get("type") as string;
@@ -107,6 +121,7 @@ export async function POST(request: NextRequest) {
   }
 
   const result = await createItem({
+    clerkId,
     type,
     title,
     desc,

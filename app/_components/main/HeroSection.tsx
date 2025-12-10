@@ -10,9 +10,6 @@ export default async function HeroSection() {
     <div>
       <div className=" bg-linear-to-b from-sky-100 via-blue-300 to-white ">
         <section className="w-full py-20">
-          <div className="absolute top-2 right-4">
-            <UserButton />
-          </div>
           <div className="max-w-4xl mx-auto text-center px-4">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">
               Find What&apos;s Lost, Return What&apos;s Found
@@ -25,15 +22,13 @@ export default async function HeroSection() {
             <div>
               <Input
                 placeholder="Search lost/found items..."
-                className="max-w-[570px] text-[14px] pl-10 border-[#E1E1FF] border-solid rounded-md mt-30 bg-white h-10"
-              ></Input>
+                className="max-w-[570px] text-[14px] pl-10 border-[#E1E1FF] border-solid rounded-md mt-30 bg-white h-10"></Input>
             </div>
 
             <div className="flex items-center gap-3  mt-10 justify-center">
               <Link
                 href="/report-lost"
-                className="flex items-center max-w-50 h-11 pl-6 rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow"
-              >
+                className="flex items-center max-w-50 h-11 pl-6 rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow">
                 <div className="flex pr-3">
                   <img
                     src="add.png"
@@ -49,8 +44,7 @@ export default async function HeroSection() {
 
               <Link
                 href="/report-found"
-                className="px-4 py-2 w-[200px] h-11 pt-3  rounded-lg border border-blue-600 text-blue-600 text-sm font-medium hover:bg-blue-50 transition bg-white"
-              >
+                className="px-4 py-2 w-[200px] h-11 pt-3  rounded-lg border border-blue-600 text-blue-600 text-sm font-medium hover:bg-blue-50 transition bg-white">
                 Report Found Item
               </Link>
             </div>

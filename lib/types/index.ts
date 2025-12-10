@@ -18,6 +18,14 @@ export type itemType = {
   imageUrl: string;
   email: string;
   phone: number;
+  clerkId: string;
   createdAt: string;
   updatedAt: string;
+};
+export type userType = {
+  clerkId: string;
+  email: string;
+  name: string;
+  profileImage: string;
+  phoneNumber: string;
 };

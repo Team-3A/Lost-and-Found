@@ -9,6 +9,7 @@ export type ItemSchemaType = {
   imageUrl: string;
   email: string;
   phone: number;
+  clerkId: string;
 };
 const ItemSchema = new Schema({
   type: { type: String, enum: ["lost", "found"], required: true },
@@ -20,6 +21,7 @@ const ItemSchema = new Schema({
   imageUrl: String,
   email: String,
   phone: Number,
+  clerkId: String,
   createdAt: { type: Date, default: Date.now },
 });
 

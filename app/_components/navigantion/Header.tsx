@@ -17,32 +17,15 @@ import {
 } from "@/components/ui/navigation-menu";
 import { useIsMobile } from "../../_hooks/use-mobile";
 
-import {
-  Wallet,
-  Smartphone,
-  Briefcase,
-  Key,
-  Laptop,
-  FileText,
-  Shirt,
-  Gem,
-  PawPrint,
-  Box,
-} from "lucide-react";
-
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
-
 import React from "react";
 import { itemType } from "@/lib/types";
+import { categories } from "@/lib/data/data";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { AvatarImage } from "@radix-ui/react-avatar";
+import { useUser } from "@clerk/nextjs";
 
 export function Header() {
+  const { user } = useUser();
   const router = useRouter();
   const isMobile = useIsMobile();
 
@@ -50,68 +33,6 @@ export function Header() {
   const [results, setResults] = useState<itemType[]>([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  const categories = [
-    {
-      name: "Wallet",
-      href: "/categories/wallet",
-      icon: Wallet,
-      description: "Lost wallets & purses",
-    },
-    {
-      name: "Phone",
-      href: "/categories/phone",
-      icon: Smartphone,
-      description: "Mobiles & tablets",
-    },
-    {
-      name: "Bag",
-      href: "/categories/bag",
-      icon: Briefcase,
-      description: "Backpacks & luggage",
-    },
-    {
-      name: "Keys",
-      href: "/categories/keys",
-      icon: Key,
-      description: "House & car keys",
-    },
-    {
-      name: "Electronics",
-      href: "/categories/electronics",
-      icon: Laptop,
-      description: "Gadgets & devices",
-    },
-    {
-      name: "Documents",
-      href: "/categories/documents",
-      icon: FileText,
-      description: "IDs & papers",
-    },
-    {
-      name: "Clothes",
-      href: "/categories/clothes",
-      icon: Shirt,
-      description: "Apparel & accessories",
-    },
-    {
-      name: "Jewelry",
-      href: "/categories/jewelry",
-      icon: Gem,
-      description: "Watches & rings",
-    },
-    {
-      name: "Pet",
-      href: "/categories/pet",
-      icon: PawPrint,
-      description: "Lost pets",
-    },
-    {
-      name: "Others",
-      href: "/categories/others",
-      icon: Box,
-      description: "Miscellaneous items",
-    },
-  ];
   const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
@@ -155,8 +76,7 @@ export function Header() {
                 <NavigationMenuLink asChild>
                   <Link
                     href="/"
-                    className="hover:text-blue-600 transition text-[15px] font-medium text-gray-700"
-                  >
+                    className="hover:text-blue-600 transition text-[15px] font-medium text-gray-700">
                     Home
                   </Link>
                 </NavigationMenuLink>
@@ -173,8 +93,7 @@ export function Header() {
                         <NavigationMenuLink asChild>
                           <Link
                             href={item.href}
-                            className="flex items-start gap-3 select-none rounded-md p-3 transition-colors hover:bg-blue-50 group"
-                          >
+                            className="flex items-start gap-3 select-none rounded-md p-3 transition-colors hover:bg-blue-50 group">
                             <item.icon className="h-5 w-5 text-gray-500 group-hover:text-blue-700" />
                             <div>
                               <div className="text-sm font-semibold">
@@ -213,8 +132,7 @@ export function Header() {
                       <NavigationMenuLink asChild>
                         <Link
                           href="/report-lost"
-                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                        >
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                           <div className="text-sm font-medium leading-none">
                             Submit Lost Item
                           </div>
@@ -228,8 +146,7 @@ export function Header() {
                       <NavigationMenuLink asChild>
                         <Link
                           href="/report-found"
-                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                        >
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                           <div className="text-sm font-medium leading-none">
                             Submit Found Item
                           </div>
@@ -263,8 +180,7 @@ export function Header() {
                   <div
                     key={item._id}
                     onClick={() => handleSelect(item._id)}
-                    className="flex gap-2 px-3 py-2 hover:bg-gray-100 cursor-pointer"
-                  >
+                    className="flex gap-2 px-3 py-2 hover:bg-gray-100 cursor-pointer">
                     {item.imageUrl && (
                       <img
                         src={item.imageUrl}
@@ -285,20 +201,12 @@ export function Header() {
               </div>
             )}
           </div>
-
-          <ClerkProvider>
-            <SignedOut>
-              <SignInButton />
-              <SignUpButton>
-                <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full text-sm h-9 px-5 shadow-sm hover:shadow-md">
-                  Sign Up
-                </button>
-              </SignUpButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </ClerkProvider>
+          <Link href="/user">
+            <Avatar>
+              <AvatarImage src={user?.imageUrl} />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+          </Link>
         </div>
       </div>
     </header>
