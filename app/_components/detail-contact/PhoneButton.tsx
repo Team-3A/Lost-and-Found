@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Phone } from "lucide-react";
 
-export default function PhoneButton({ phone }: { phone: string }) {
+export default function PhoneButton({ phone }: { phone: number | null }) {
   const [open, setOpen] = useState(false);
 
   return (

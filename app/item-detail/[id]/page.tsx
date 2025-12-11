@@ -1,12 +1,8 @@
-" use client";
+"use client";
 
-import MailButton from "@/app/_components/detail-contact/MailButton";
-import PhoneButton from "@/app/_components/detail-contact/PhoneButton";
-
-// import PhoneButton from "@/app/_components/navigantion/PhoneButton";
-// import ContactButton from "@/app/_components/navigantion/PhoneButton";
 import { Badge } from "@/components/ui/badge";
 import { itemType } from "@/lib/types";
+
 import {
   ChartBarStacked,
   ClipboardMinus,
@@ -19,22 +15,39 @@ import {
 import { MapPin } from "lucide-react";
 
 import Link from "next/link";
-import React, { useState } from "react";
-async function getItems() {
-  const response = await fetch("http:localhost:3000/api/items");
-  const resData = await response.json();
-  return resData.data;
-}
+import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import PhoneButton from "@/app/_components/detail-contact/PhoneButton";
+import MailButton from "@/app/_components/detail-contact/MailButton";
+import ItemDetailSkeleton from "@/app/_components/main/Skeleton/ItemDetailSkeleton";
 
-export default async function LostItemDetail({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const items = await getItems();
-  const dynamicParams = await params;
-  const id = dynamicParams.id;
-  const item = items.find((itm: itemType) => itm._id === id);
+export default function LostItemDetail() {
+  const params = useParams();
+  const id = params.id as string;
+  const [item, setItem] = useState<itemType | null>(null);
+  const [items, setItems] = useState<itemType[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchItems() {
+      try {
+        const response = await fetch("/api/items");
+        const resData = await response.json();
+        setItems(resData.data);
+        const foundItem = resData.data.find((itm: itemType) => itm._id === id);
+        setItem(foundItem || null);
+      } catch (error) {
+        console.error("Failed to fetch items:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchItems();
+  }, [id]);
+
+  if (loading) {
+    return <ItemDetailSkeleton loading={true} />;
+  }
 
   if (!item) {
     return <div className="p-8">Item not found</div>;
