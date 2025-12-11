@@ -12,7 +12,7 @@ import PhoneButton from "@/app/_components/detail-contact/PhoneButton";
 >>>>>>> 58af694 (skeleton)
 import { Badge } from "@/components/ui/badge";
 import { itemType } from "@/lib/types";
-import ItemDetailSkeleton from "@/components/ui/ItemDetailSkeleton";
+import ItemDetailSkeleton from "@/app/_components/main/Skeleton/ItemDetailSkeleton";
 import {
   ChartBarStacked,
   ClipboardMinus,

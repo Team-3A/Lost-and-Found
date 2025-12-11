@@ -2,12 +2,12 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Marquee } from "@/components/ui/marquee";
-import SkeletonCards from "@/components/ui/SekeletonCard";
 
 import { itemType } from "@/lib/types";
 import { MapPin } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import SkeletonCards from "./Skeleton/SekeletonCard";
 
 export default function Card() {
   const [items, setItems] = useState<itemType[]>([]);
