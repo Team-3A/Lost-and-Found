@@ -143,7 +143,8 @@ export async function PATCH(request: NextRequest) {
     const email = formData.get("email") as string;
     const phone = formData.get("phone") as string;
     const id = formData.get("id") as string;
-    let uploadedUrl = "";
+    const oldImageUrl = formData.get("oldImageUrl") as string;
+    let uploadedUrl = oldImageUrl;
 
     if (image && typeof image === "object") {
       uploadedUrl = await uploadImageToCloudinary(image);

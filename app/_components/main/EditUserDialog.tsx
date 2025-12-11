@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Pen, Trash } from "lucide-react";
+import { set } from "mongoose";
 
 export const EditUserDialog = ({
   id,
@@ -22,10 +23,27 @@ export const EditUserDialog = ({
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [phone, setPhone] = useState<number | string>("");
-  const [image, setImage] = useState<File | null>(null);
+  const [newImage, setNewImage] = useState<File | null>(null);
+  const [imageUrl, setImage] = useState("");
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
   const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    if (!id) return;
+
+    fetch(`/api/items/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setTitle(data.title);
+        setDesc(data.desc);
+        setPhone(data.phone);
+        setCategory(data.category);
+        setLocation(data.location);
+        setEmail(data.email);
+        setImage(data.imageUrl);
+      });
+  }, [id]);
   // --- Handlers ---
   const titleChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
     setTitle(e.target.value);
@@ -44,6 +62,10 @@ export const EditUserDialog = ({
   const emailChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
     setEmail(e.target.value);
 
+  const imageChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) setNewImage(e.target.files[0]);
+  };
+
   // --- PATCH update ---
   const editItemHandler = async (id: string) => {
     const formData = new FormData();
@@ -55,7 +77,10 @@ export const EditUserDialog = ({
     formData.append("location", location);
     formData.append("email", email);
     formData.append("phone", String(phone));
-    if (image) formData.append("image", image);
+
+    if (newImage) {
+      formData.append("image", newImage);
+    } else formData.append("oldImageUrl", imageUrl || "");
 
     const res = await fetch(`/api/items`, {
       method: "PATCH",
@@ -80,21 +105,6 @@ export const EditUserDialog = ({
     });
     await refetchItems();
   };
-
-  useEffect(() => {
-    if (!id) return;
-
-    fetch(`/api/items/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setTitle(data.title);
-        setDesc(data.desc);
-        setPhone(data.phone);
-        setCategory(data.category);
-        setLocation(data.location);
-        setEmail(data.email);
-      });
-  }, [id]);
 
   return (
     <Dialog>
@@ -156,6 +166,14 @@ export const EditUserDialog = ({
             className="w-[288px]"
             value={email}
             onChange={emailChangeHandler}
+          />
+        </div>
+        <div className="flex gap-4 justify-between">
+          <Label>Image</Label>
+          <Input
+            type="file"
+            className="w-[288px]"
+            onChange={imageChangeHandler}
           />
         </div>
 
