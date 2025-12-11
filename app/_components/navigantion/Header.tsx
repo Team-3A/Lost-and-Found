@@ -33,8 +33,6 @@ export function Header() {
   const [results, setResults] = useState<itemType[]>([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  const [open, setOpen] = React.useState(false);
-
   useEffect(() => {
     const delay = setTimeout(() => {
       if (query.trim().length > 0) {
@@ -76,14 +74,15 @@ export function Header() {
                 <NavigationMenuLink asChild>
                   <Link
                     href="/"
-                    className="hover:text-blue-600 transition text-[15px] font-medium text-gray-700">
+                    className="hover:text-blue-600 transition text-[18px] font-medium text-gray-700 "
+                  >
                     Home
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-[15px] font-medium text-gray-700 bg-transparent hover:bg-gray-100/50">
+                <NavigationMenuTrigger className="text-[18px] font-medium text-gray-700 bg-transparent hover:bg-gray-100/50">
                   Categories
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
@@ -93,7 +92,8 @@ export function Header() {
                         <NavigationMenuLink asChild>
                           <Link
                             href={item.href}
-                            className="flex items-start gap-3 select-none rounded-md p-3 transition-colors hover:bg-blue-50 group">
+                            className="flex items-start gap-3 select-none rounded-md p-3 transition-colors hover:bg-blue-50 group"
+                          >
                             <item.icon className="h-5 w-5 text-gray-500 group-hover:text-blue-700" />
                             <div>
                               <div className="text-sm font-semibold">
@@ -111,7 +111,7 @@ export function Header() {
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-[15px] font-medium text-gray-700 bg-transparent hover:bg-gray-100/50">
+                <NavigationMenuTrigger className="text-[18px] font-medium text-gray-700 bg-transparent hover:bg-gray-100/50">
                   Submit Item
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
@@ -132,7 +132,8 @@ export function Header() {
                       <NavigationMenuLink asChild>
                         <Link
                           href="/report-lost"
-                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
                           <div className="text-sm font-medium leading-none">
                             Submit Lost Item
                           </div>
@@ -146,7 +147,8 @@ export function Header() {
                       <NavigationMenuLink asChild>
                         <Link
                           href="/report-found"
-                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
                           <div className="text-sm font-medium leading-none">
                             Submit Found Item
                           </div>
@@ -180,7 +182,8 @@ export function Header() {
                   <div
                     key={item._id}
                     onClick={() => handleSelect(item._id)}
-                    className="flex gap-2 px-3 py-2 hover:bg-gray-100 cursor-pointer">
+                    className="flex gap-2 px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                  >
                     {item.imageUrl && (
                       <img
                         src={item.imageUrl}
