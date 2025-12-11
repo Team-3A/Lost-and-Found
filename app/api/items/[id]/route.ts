@@ -4,12 +4,12 @@ import { connectDB } from "@/lib/mongodb";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
-
-    const item = await Item.findById(params.id);
+    const { id } = await params;
+    const item = await Item.findById(id);
 
     if (!item) {
       return NextResponse.json({ error: "Item not found" }, { status: 404 });

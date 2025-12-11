@@ -28,6 +28,7 @@ export const EditUserDialog = ({
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
   const [email, setEmail] = useState("");
+  const [type, setType] = useState("");
 
   useEffect(() => {
     if (!id) return;
@@ -42,6 +43,7 @@ export const EditUserDialog = ({
         setLocation(data.location);
         setEmail(data.email);
         setImage(data.imageUrl);
+        setType(data.type);
       });
   }, [id]);
   // --- Handlers ---
@@ -61,12 +63,17 @@ export const EditUserDialog = ({
     setLocation(e.target.value);
   const emailChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
     setEmail(e.target.value);
-
+  const imageChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) setNewImage(e.target.files[0]);
+  };
+  const typeChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setType(e.target.value);
+  };
   // --- PATCH update ---
   const editItemHandler = async (id: string) => {
     const formData = new FormData();
     formData.append("id", id);
-    formData.append("type", "found");
+    formData.append("type", type);
     formData.append("title", title);
     formData.append("desc", desc);
     formData.append("category", category);
@@ -164,13 +171,28 @@ export const EditUserDialog = ({
             onChange={emailChangeHandler}
           />
         </div>
+        <div className="flex gap-4 justify-between">
+          <Label>Type</Label>
+          <Input
+            className="w-[288px]"
+            value={type}
+            onChange={typeChangeHandler}
+          />
+        </div>
+        <div className="flex gap-4 justify-between">
+          <Label>Image</Label>
+          <Input
+            className="w-[288px]"
+            value={imageUrl}
+            onChange={imageChangeHandler}
+          />
+        </div>
 
         <div className="flex justify-between">
           <Button
             variant="outline"
             className="bg-white border border-red-500"
-            onClick={() => deleteItemHandler(id)}
-          >
+            onClick={() => deleteItemHandler(id)}>
             <Trash color="red" />
           </Button>
 

@@ -3,7 +3,6 @@
 import { useAuth, useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { AiOutlineLoading } from "react-icons/ai";
 import { UserResource } from "@clerk/types";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";

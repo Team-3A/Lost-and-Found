@@ -51,15 +51,13 @@ function ItemCard({
           variant={item.type === "lost" ? "destructive" : "default"}
           className={`absolute top-4 left-4 z-10 text-sm px-3 py-1 ${
             item.type === "found" ? "bg-green-600 hover:bg-green-700" : ""
-          }`}
-        >
+          }`}>
           {item.type === "lost" ? "Lost" : "Found"}
         </Badge>
 
         <Badge
           variant="secondary"
-          className="absolute bottom-4 right-4 z-10 text-xs flex items-center gap-1"
-        >
+          className="absolute bottom-4 right-4 z-10 text-xs flex items-center gap-1">
           <MapPin className="w-4 h-4" />
           {item.location}
         </Badge>
@@ -203,10 +201,9 @@ export default function UserPage() {
           </p>
           <p
             className="flex items-center gap-2 text-red-600 font-medium cursor-pointer"
-            onClick={handleSignOut}
-          >
-            <GoSignOut /> Sign Out
-            <span className="hidden">
+            onClick={handleSignOut}>
+            <span className="flex gap-2 items-center">
+              <GoSignOut />
               <SignOutButton />
             </span>
           </p>
@@ -262,15 +259,13 @@ export default function UserPage() {
         <div className="flex-col justify-between items-start">
           <Button
             onClick={handleNewPost}
-            className="bg-blue-600 hover:bg-blue-700"
-          >
+            className="bg-blue-600 hover:bg-blue-700">
             New Post
           </Button>
 
           <Tabs
             value={activeTab}
-            onValueChange={(v) => setActiveTab(v as TabValue)}
-          >
+            onValueChange={(v) => setActiveTab(v as TabValue)}>
             <TabsList className="mt-4 min-w-250">
               <TabsTrigger value="all">All</TabsTrigger>
               <TabsTrigger value="lost">Lost</TabsTrigger>
@@ -354,8 +349,7 @@ export default function UserPage() {
                       e.preventDefault();
                       setCurrentPage(i + 1);
                     }}
-                    isActive={currentPage === i + 1}
-                  >
+                    isActive={currentPage === i + 1}>
                     {i + 1}
                   </PaginationLink>
                 </PaginationItem>

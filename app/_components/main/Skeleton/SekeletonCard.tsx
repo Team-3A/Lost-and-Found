@@ -1,6 +1,8 @@
 import React from "react";
-
-export default function SkeletonCards({ loading }: any) {
+type SkeletonCardsProps = {
+  loading: boolean;
+};
+export default function SkeletonCards({ loading }: SkeletonCardsProps) {
   if (!loading) return null;
 
   return (
@@ -9,8 +11,7 @@ export default function SkeletonCards({ loading }: any) {
         {[...Array(2)].map((_, i) => (
           <div
             key={i}
-            className="border rounded-3xl shadow-md w-60 p-4 bg-white animate-pulse"
-          >
+            className="border rounded-3xl shadow-md w-60 p-4 bg-white animate-pulse">
             <div className="relative h-40 bg-gray-200 rounded-2xl" />
             <div className="mt-4 h-6 bg-gray-200 rounded w-3/4" />
             <div className="mt-2 h-4 bg-gray-200 rounded w-1/2" />
@@ -24,8 +25,7 @@ export default function SkeletonCards({ loading }: any) {
             {[...Array(4)].map((_, i) => (
               <div
                 key={i}
-                className="border rounded-2xl shadow-md w-60 p-2 bg-white animate-pulse"
-              >
+                className="border rounded-2xl shadow-md w-60 p-2 bg-white animate-pulse">
                 <div className="relative h-40 bg-gray-200 rounded-xl" />
                 <div className="mt-3 h-5 bg-gray-200 rounded w-3/4" />
                 <div className="mt-2 h-4 bg-gray-200 rounded w-1/2" />
