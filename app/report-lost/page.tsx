@@ -25,7 +25,7 @@ const THEMES = [
   { id: "mobile", label: "Mobile-optimized" },
 ];
 
-export default function ReportFoundThemes() {
+export default function ReportLostThemes() {
   const [theme, setTheme] = useState("default");
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -33,7 +33,8 @@ export default function ReportFoundThemes() {
   const [location, setLocation] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState<number | string>("");
-  const [image, setImage] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<File | null>(null);
+  const [date, setDate] = useState<string>("");
   const { getToken } = useAuth();
 
   const handleSubmit = async () => {
@@ -46,13 +47,14 @@ export default function ReportFoundThemes() {
     formData.append("location", location);
     formData.append("email", email);
     formData.append("phone", String(phone));
+    formData.append("date", date ? new Date(date).toISOString() : "");
 
-    if (image) {
-      console.log("hello");
-      formData.append("image", image);
+    if (imageUrl) {
+      console.log("hhhhhi");
+      formData.append("imageUrl", imageUrl);
     } else
       formData.append(
-        "image",
+        "imageUrl",
         "https://community.softr.io/uploads/db9110/original/2X/7/74e6e7e382d0ff5d7773ca9a87e6f6f8817a68a6.jpeg"
       );
 
@@ -64,6 +66,7 @@ export default function ReportFoundThemes() {
         "X-App-Client": "sentinel-trace",
       },
     });
+
     const data = await res.json();
     alert(data.message || "Saved!");
   };
@@ -88,7 +91,6 @@ export default function ReportFoundThemes() {
       style={{ fontFamily: "Plus Jakarta Sans, Inter, system-ui" }}
     >
       <div className="max-w-4xl mx-auto px-4">
-        {/* theme switch */}
         <div className="flex items-center justify-end mb-6 gap-3">
           <div className="hidden sm:flex items-center gap-3 text-sm">
             <Sun className="w-4 h-4 text-yellow-400" />
@@ -145,7 +147,6 @@ export default function ReportFoundThemes() {
           }}
         >
           <div className={`${theme === "mobile" ? "space-y-5" : "space-y-6"}`}>
-            {/* item detail */}
             <section
               className={`p-6 rounded-2xl border ${
                 theme === "dark"
@@ -265,25 +266,42 @@ export default function ReportFoundThemes() {
                     <input
                       type="file"
                       accept="image/*"
-                      onChange={(e) => setImage(e.target.files?.[0] || null)}
+                      onChange={(e) => setImageUrl(e.target.files?.[0] || null)}
                       className="block w-full text-sm text-gray-600 file:rounded-md file:border-0 file:px-4 file:py-2 file:bg-sky-50 file:text-sky-700 file:font-medium"
                     />
-                    {image && (
+                    {imageUrl && (
                       <span className="text-sm text-gray-500">
-                        {image.name}
+                        {imageUrl.name}
                       </span>
                     )}
                   </div>
                 </div>
 
+                {/* <div>
+                  <label
+                    className={`flex items-center gap-2 text-sm font-medium mb-2 ${textColor}`}
+                  >
+                    
+                    <Calendar 
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                    className="w-4 h-4 text-sky-500" /> Date found
+                  </label>
+                  <input
+                    type="date"
+                    className="w-full rounded-lg border border-gray-200 p-2"
+                  />
+                </div> */}
                 <div>
                   <label
                     className={`flex items-center gap-2 text-sm font-medium mb-2 ${textColor}`}
                   >
-                    <Calendar className="w-4 h-4 text-sky-500" /> Date found
+                    <Calendar className="w-4 h-4 text-sky-500" /> Date lost
                   </label>
                   <input
                     type="date"
+                    value={date} // state
+                    onChange={(e) => setDate(e.target.value)}
                     className="w-full rounded-lg border border-gray-200 p-2"
                   />
                 </div>
