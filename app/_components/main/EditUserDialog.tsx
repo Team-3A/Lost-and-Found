@@ -62,10 +62,6 @@ export const EditUserDialog = ({
   const emailChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
     setEmail(e.target.value);
 
-  const imageChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) setNewImage(e.target.files[0]);
-  };
-
   // --- PATCH update ---
   const editItemHandler = async (id: string) => {
     const formData = new FormData();
@@ -166,14 +162,6 @@ export const EditUserDialog = ({
             className="w-[288px]"
             value={email}
             onChange={emailChangeHandler}
-          />
-        </div>
-        <div className="flex gap-4 justify-between">
-          <Label>Image</Label>
-          <Input
-            type="file"
-            className="w-[288px]"
-            onChange={imageChangeHandler}
           />
         </div>
 
