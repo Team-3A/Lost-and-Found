@@ -11,6 +11,7 @@ export const createItem = async (itemData: {
   email: string;
   imageUrl: string;
   clerkId: string;
+  date?: Date;
 }) => {
   await connectDB();
   const newItem = new Item({ ...itemData });

@@ -63,10 +63,10 @@ export async function POST(request: NextRequest) {
   const desc = formData.get("desc") as string;
   const category = formData.get("category") as string;
   const location = formData.get("location") as string;
-
-  const image = formData.get("image") as File | null;
+  const imageUrl = formData.get("imageUrl") as File | null;
   const email = formData.get("email") as string;
   const phone = formData.get("phone") as string;
+  const date = formData.get("date") as string;
 
   if (!title || !desc || !category || !location || !email || !phone || !type) {
     return NextResponse.json({ error: "All fields are required!" });
@@ -75,13 +75,17 @@ export async function POST(request: NextRequest) {
   // img bhgu bol upload hihgu
   let uploadedUrl = "";
 
-  if (image && typeof image === "object") {
-    uploadedUrl = await uploadImageToCloudinary(image);
+  if (imageUrl && typeof imageUrl === "object") {
+    uploadedUrl = await uploadImageToCloudinary(imageUrl);
+  } else if (typeof imageUrl === "string") {
+    uploadedUrl = imageUrl;
   }
+  const dateValue = date ? new Date(date) : undefined;
 
   const result = await createItem({
     clerkId,
     type,
+    date: dateValue,
     title,
     desc,
     category,

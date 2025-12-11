@@ -46,7 +46,15 @@ export default function ReportFoundThemes() {
     formData.append("location", location);
     formData.append("email", email);
     formData.append("phone", String(phone));
-    if (image) formData.append("image", image);
+
+    if (image) {
+      console.log("hello");
+      formData.append("image", image);
+    } else
+      formData.append(
+        "image",
+        "https://community.softr.io/uploads/db9110/original/2X/7/74e6e7e382d0ff5d7773ca9a87e6f6f8817a68a6.jpeg"
+      );
 
     const res = await fetch("/api/items", {
       method: "POST",
@@ -56,7 +64,6 @@ export default function ReportFoundThemes() {
         "X-App-Client": "sentinel-trace",
       },
     });
-
     const data = await res.json();
     alert(data.message || "Saved!");
   };

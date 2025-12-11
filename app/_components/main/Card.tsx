@@ -41,7 +41,8 @@ export default function Card() {
                 </Badge>
 
                 <img
-                  src={item.imageUrl}
+                  // src={item.imageUrl || "/skeleton.png"}
+                  src={item.imageUrl || "skeleton.png"}
                   alt={item.title}
                   className="h-40 w-full object-cover rounded-xl"
                 />
@@ -69,7 +70,7 @@ export default function Card() {
                 </Badge>
 
                 <img
-                  src={item.imageUrl}
+                  src={item.imageUrl || "skeleton.png"}
                   alt={item.title}
                   className="h-40 w-full object-cover rounded-xl"
                 />

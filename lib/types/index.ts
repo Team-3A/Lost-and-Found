@@ -9,6 +9,8 @@ export type UserType = {
   updatedat: string;
 };
 export type itemType = {
+  isDraft: boolean;
+  resolved: string;
   _id: string;
   type: string;
   title: string;
@@ -21,6 +23,7 @@ export type itemType = {
   clerkId: string;
   createdAt: string;
   updatedAt: string;
+  date: string;
 };
 export type userType = {
   clerkId: string;

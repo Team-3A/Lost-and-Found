@@ -35,8 +35,6 @@ export function Header() {
   const [results, setResults] = useState<itemType[]>([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  const [open, setOpen] = React.useState(false);
-
   useEffect(() => {
     const delay = setTimeout(() => {
       if (query.trim().length > 0) {
@@ -78,7 +76,7 @@ export function Header() {
                 <NavigationMenuLink asChild>
                   <Link
                     href="/"
-                    className="hover:text-blue-600 transition text-[15px] font-medium text-gray-700"
+                    className="hover:text-blue-600 transition text-[18px] font-medium text-gray-700 "
                   >
                     Home
                   </Link>
@@ -86,7 +84,7 @@ export function Header() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-[15px] font-medium text-gray-700 bg-transparent hover:bg-gray-100/50">
+                <NavigationMenuTrigger className="text-[18px] font-medium text-gray-700 bg-transparent hover:bg-gray-100/50">
                   Categories
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
@@ -115,7 +113,7 @@ export function Header() {
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-[15px] font-medium text-gray-700 bg-transparent hover:bg-gray-100/50">
+                <NavigationMenuTrigger className="text-[18px] font-medium text-gray-700 bg-transparent hover:bg-gray-100/50">
                   Submit Item
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
