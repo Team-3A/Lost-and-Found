@@ -1,3 +1,10 @@
+" use client";
+
+import MailButton from "@/app/_components/detail-contact/MailButton";
+import PhoneButton from "@/app/_components/detail-contact/PhoneButton";
+
+// import PhoneButton from "@/app/_components/navigantion/PhoneButton";
+// import ContactButton from "@/app/_components/navigantion/PhoneButton";
 import { Badge } from "@/components/ui/badge";
 import { itemType } from "@/lib/types";
 import {
@@ -12,14 +19,10 @@ import {
 import { MapPin } from "lucide-react";
 
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 async function getItems() {
-  const response = await fetch("http://localhost:3000/api/items");
-  // console.log(response);
-
+  const response = await fetch("http:localhost:3000/api/items");
   const resData = await response.json();
-  // console.log(resData);
-
   return resData.data;
 }
 
@@ -84,17 +87,12 @@ export default async function LostItemDetail({
               </span>
             </div>
           </div>
+
           <div className="flex gap-4 flex-col w-80 rounded-md border p-6 h-fit shadow-ls mt-5">
             <h1 className="text-xl font-semibold">Actions</h1>
-            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium">
-              <Mail className="inline-block mr-2" />
-              Contact Finder
-            </button>
 
-            <button className="w-full border border-gray-400 py-3 rounded-lg text-gray-800 hover:bg-gray-100 font-medium">
-              <Phone className="inline-block mr-2" />
-              Report Item Match
-            </button>
+            <MailButton email={item.email} />
+            <PhoneButton phone={item.phone} />
           </div>
         </div>
       </div>

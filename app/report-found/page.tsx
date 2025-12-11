@@ -81,7 +81,6 @@ export default function ReportFoundThemes() {
       style={{ fontFamily: "Plus Jakarta Sans, Inter, system-ui" }}
     >
       <div className="max-w-4xl mx-auto px-4">
-        {/* theme switch */}
         <div className="flex items-center justify-end mb-6 gap-3">
           <div className="hidden sm:flex items-center gap-3 text-sm">
             <Sun className="w-4 h-4 text-yellow-400" />
@@ -138,7 +137,6 @@ export default function ReportFoundThemes() {
           }}
         >
           <div className={`${theme === "mobile" ? "space-y-5" : "space-y-6"}`}>
-            {/* item detail */}
             <section
               className={`p-6 rounded-2xl border ${
                 theme === "dark"

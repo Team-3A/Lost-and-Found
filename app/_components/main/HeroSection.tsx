@@ -1,7 +1,6 @@
 // "use client";
 
 import { Input } from "@/components/ui/input";
-import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import Card from "./Card";
 
@@ -22,13 +21,15 @@ export default async function HeroSection() {
             <div>
               <Input
                 placeholder="Search lost/found items..."
-                className="max-w-[570px] text-[14px] pl-10 border-[#E1E1FF] border-solid rounded-md mt-30 bg-white h-10"></Input>
+                className="max-w-[570px] text-[14px] pl-10 border-[#E1E1FF] border-solid rounded-md mt-30 bg-white h-10"
+              ></Input>
             </div>
 
             <div className="flex items-center gap-3  mt-10 justify-center">
               <Link
                 href="/report-lost"
-                className="flex items-center max-w-50 h-11 pl-6 rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow">
+                className="flex items-center max-w-50 h-11 pl-6 rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow"
+              >
                 <div className="flex pr-3">
                   <img
                     src="add.png"
@@ -44,7 +45,8 @@ export default async function HeroSection() {
 
               <Link
                 href="/report-found"
-                className="px-4 py-2 w-[200px] h-11 pt-3  rounded-lg border border-blue-600 text-blue-600 text-sm font-medium hover:bg-blue-50 transition bg-white">
+                className="px-4 py-2 w-[200px] h-11 pt-3  rounded-lg border border-blue-600 text-blue-600 text-sm font-medium hover:bg-blue-50 transition bg-white"
+              >
                 Report Found Item
               </Link>
             </div>
