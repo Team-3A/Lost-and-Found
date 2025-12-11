@@ -77,6 +77,21 @@ export const EditUserDialog = ({
     await refetchItems();
   };
 
+  useEffect(() => {
+    if (!id) return;
+
+    fetch(`/api/items/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setTitle(data.title);
+        setDesc(data.desc);
+        setPhone(data.phone);
+        setCategory(data.category);
+        setLocation(data.location);
+        setEmail(data.email);
+      });
+  }, [id]);
+
   return (
     <Dialog>
       <DialogTrigger className="rounded-full bg-white border w-11 h-11 flex justify-center items-center cursor-pointer">
@@ -129,7 +144,8 @@ export const EditUserDialog = ({
           <Button
             variant="outline"
             className="bg-white border border-red-500"
-            onClick={() => deleteItemHandler(id)}>
+            onClick={() => deleteItemHandler(id)}
+          >
             <Trash color="red" />
           </Button>
 
