@@ -9,6 +9,8 @@ export type UserType = {
   updatedat: string;
 };
 export type itemType = {
+  isDraft: boolean;
+  resolved: string;
   _id: string;
   type: string;
   title: string;
