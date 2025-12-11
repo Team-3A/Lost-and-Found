@@ -66,19 +66,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     }
   };
 
-  if (!isLoaded || isLoading) {
-    return (
-      <div className="w-screen h-screen flex">
-        <div className="w-full h-full flex items-center justify-center gap-1.5">
-          <AiOutlineLoading className="animate-spin" size={24} />
-          <div className="text-2xl leading-8 font-semibold text-foreground">
-            Loading
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="w-screen flex flex-col">
       <>
