@@ -18,7 +18,7 @@ export default async function CategoryPage({
 
   return (
     <div className="ml-5">
-      <h1 className="text-4xl font-bold text-center capitalize mb-10">
+      <h1 className="text-4xl font-bold text-center capitalize mb-10 mt-10">
         {slug}
       </h1>
 
@@ -27,7 +27,7 @@ export default async function CategoryPage({
           <h2 className="text-2xl font-semibold mb-6 text-red-600">
             Lost Items
           </h2>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             {lostItems.map((item: itemType) => (
               <ItemCard key={item._id} item={item} />
             ))}
@@ -40,7 +40,7 @@ export default async function CategoryPage({
           <h2 className="text-2xl font-semibold mb-6 mt-12 text-green-600">
             Found Items
           </h2>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             {foundItems.map((item: itemType) => (
               <ItemCard key={item._id} item={item} />
             ))}
