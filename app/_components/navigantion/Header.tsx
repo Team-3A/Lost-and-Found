@@ -23,6 +23,8 @@ import { categories } from "@/lib/data/data";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { useUser } from "@clerk/nextjs";
+import { ResponsiveMenu } from "./ResponsiveMenu";
+import { Menu } from "lucide-react";
 
 export function Header() {
   const { user } = useUser();
@@ -204,6 +206,10 @@ export function Header() {
               </div>
             )}
           </div>
+          <div className="md:hidden ">
+            <Menu className="text-4xl" onClick={() => setOpen(!open)} />
+          </div>
+          <ResponsiveMenu open={open} />
           <Link href="/user">
             <Avatar>
               <AvatarImage src={user?.imageUrl} />

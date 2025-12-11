@@ -43,47 +43,6 @@ export async function GET(req: NextRequest) {
   return response;
 }
 
-// export async function POST(request: NextRequest) {
-//   const formData = await request.formData();
-
-//   const type = formData.get("type") as string;
-//   const title = formData.get("title") as string;
-//   const desc = formData.get("desc") as string;
-//   const category = formData.get("category") as string;
-//   const location = formData.get("location") as string;
-//   const image = formData.get("image") as File;
-//   const email = formData.get("email") as string;
-//   const phone = formData.get("phone") as string;
-
-//   if (!title || !desc || !category || !location || !email || !phone || !type) {
-//     return NextResponse.json({ error: "All fields are required!" });
-//   }
-
-//   const uploadedUrl = await uploadImageToCloudinary(image);
-
-//   const result = await createItem({
-//     type,
-//     title,
-//     desc,
-//     category,
-//     location,
-//     imageUrl: uploadedUrl,
-//     email,
-//     phone: parseFloat(phone),
-//   });
-
-//   if (result) {
-//     return NextResponse.json(
-//       { message: "Item created successfully" },
-//       { status: 200 }
-//     );
-//   } else {
-//     return NextResponse.json(
-//       { message: "Item creation failed" },
-//       { status: 400 }
-//     );
-//   }
-// }
 export async function POST(request: NextRequest) {
   const headersList = await headers();
   const authorization = headersList.get("Authorization");
@@ -146,5 +105,75 @@ export async function POST(request: NextRequest) {
       { message: "Item creation failed" },
       { status: 400 }
     );
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const { id } = await req.json();
+    if (!id) {
+      return NextResponse.json(
+        { error: "Category ID required" },
+        { status: 400 }
+      );
+    }
+
+    const deleted = await Item.findByIdAndDelete(id);
+    if (!deleted) {
+      return NextResponse.json({ error: "Item not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({ message: "Item deleted" }, { status: 200 });
+  } catch (error) {
+    console.error("DELETE /api/items/[id] error:", error);
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
+  }
+}
+
+export async function PATCH(request: NextRequest) {
+  try {
+    const formData = await request.formData();
+    const type = formData.get("type") as string;
+    const title = formData.get("title") as string;
+    const desc = formData.get("desc") as string;
+    const category = formData.get("category") as string;
+    const location = formData.get("location") as string;
+
+    const image = formData.get("image") as File | null;
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const id = formData.get("id") as string;
+    let uploadedUrl = "";
+
+    if (image && typeof image === "object") {
+      uploadedUrl = await uploadImageToCloudinary(image);
+    }
+    if (!formData) {
+      return NextResponse.json(
+        { error: "Category ID required" },
+        { status: 400 }
+      );
+    }
+
+    const updateData = {
+      type,
+      title,
+      desc,
+      category,
+      location,
+      imageUrl: uploadedUrl,
+      email,
+      phone: parseFloat(phone),
+    };
+
+    const updated = await Item.findByIdAndUpdate(id, updateData);
+    if (!updated) {
+      return NextResponse.json({ error: "Food not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({ message: "Food updated" }, { status: 200 });
+  } catch (error) {
+    console.error("DELETE /api/categories error:", error);
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

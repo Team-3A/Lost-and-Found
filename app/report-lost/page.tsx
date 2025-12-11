@@ -25,7 +25,7 @@ const THEMES = [
   { id: "mobile", label: "Mobile-optimized" },
 ];
 
-export default function ReportLostThemes() {
+export default function ReportFoundThemes() {
   const [theme, setTheme] = useState("default");
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -88,6 +88,7 @@ export default function ReportLostThemes() {
       style={{ fontFamily: "Plus Jakarta Sans, Inter, system-ui" }}
     >
       <div className="max-w-4xl mx-auto px-4">
+        {/* theme switch */}
         <div className="flex items-center justify-end mb-6 gap-3">
           <div className="hidden sm:flex items-center gap-3 text-sm">
             <Sun className="w-4 h-4 text-yellow-400" />
@@ -144,6 +145,7 @@ export default function ReportLostThemes() {
           }}
         >
           <div className={`${theme === "mobile" ? "space-y-5" : "space-y-6"}`}>
+            {/* item detail */}
             <section
               className={`p-6 rounded-2xl border ${
                 theme === "dark"
@@ -164,7 +166,6 @@ export default function ReportLostThemes() {
                     Give a clear, short title and a precise description.
                   </p>
                 </div>
-                <div className={`text-xs ${muted}`}>Step 1 of 3</div>
               </div>
 
               <div
@@ -245,7 +246,6 @@ export default function ReportLostThemes() {
                   >
                     <MapPin className="w-4 h-4 text-sky-500" /> Location
                   </label>
-
                   <Input
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
@@ -280,7 +280,7 @@ export default function ReportLostThemes() {
                   <label
                     className={`flex items-center gap-2 text-sm font-medium mb-2 ${textColor}`}
                   >
-                    <Calendar className="w-4 h-4 text-sky-500" /> Date lost
+                    <Calendar className="w-4 h-4 text-sky-500" /> Date found
                   </label>
                   <input
                     type="date"

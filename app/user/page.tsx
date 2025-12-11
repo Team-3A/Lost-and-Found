@@ -17,22 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
-import { IoSearch, IoSettingsOutline } from "react-icons/io5";
-import { useRouter } from "next/navigation";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
-
-const ITEMS_PER_PAGE = 6;
-
-type TabValue = "all" | "lost" | "found" | "drafts";
-type SortOrder = "newest" | "oldest";
+import { EditUserDialog } from "../_components/main/EditUserDialog";
 
 export default function UserPage() {
   const { user } = useUser();
@@ -60,29 +45,11 @@ export default function UserPage() {
     fetchItems();
   }, []);
 
-  const userItems = useMemo(() => {
-    return items.filter((item) => item.clerkId === clerkId);
-  }, [items, clerkId]);
-
-  const filteredAndSortedItems = useMemo(() => {
-    let filtered = userItems;
-
-    // Filter by tab
-    if (activeTab === "lost")
-      filtered = filtered.filter((i) => i.type === "lost" && !i.resolved);
-    else if (activeTab === "found")
-      filtered = filtered.filter((i) => i.type === "found" && !i.resolved);
-    else if (activeTab === "drafts")
-      filtered = filtered.filter((i) => i.isDraft);
-
-    if (searchTerm.trim()) {
-      const term = searchTerm.toLowerCase();
-      filtered = filtered.filter(
-        (i) =>
-          i.title.toLowerCase().includes(term) ||
-          i.desc.toLowerCase().includes(term)
-      );
-    }
+  const getItems = async function () {
+    const response = await fetch("/api/items");
+    if (!response.ok) throw new Error("Failed to load items");
+    return (await response.json()).data;
+  };
 
     // Sort by date
     return [...filtered].sort((a, b) => {
@@ -245,58 +212,19 @@ export default function UserPage() {
                   <div className="bg-gray-200 border-2 border-dashed rounded-t-xl w-full h-48" />
                 )}
 
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-lg line-clamp-1">
-                      {item.title}
-                    </CardTitle>
-                    <Badge
-                      variant="default"
-                      className={
-                        item.type === "lost"
-                          ? "bg-red-500"
-                          : item.type === "found"
-                          ? "bg-blue-500"
-                          : "bg-gray-500"
-                      }
-                    >
-                      {item.isDraft ? "Draft" : item.type}
-                    </Badge>
-                  </div>
-                </CardHeader>
+                <p className="text-gray-700">{item.desc}</p>
 
-                <CardContent className="space-y-3">
-                  <p className="text-sm text-gray-500">
-                    {new Date(item.createdAt).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })}{" "}
-                    — {item.location}
-                  </p>
-                  <p className="text-sm text-gray-700 line-clamp-2">
-                    {item.desc}
-                  </p>
+                <div className="flex gap-4 pt-3">
+                  <EditUserDialog id={item._id} refetchItems={getItems} />
 
-                  <div className="flex gap-4 pt-2">
-                    <Button
-                      variant="link"
-                      className="text-blue-600 px-0 h-auto font-medium"
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      variant="link"
-                      className="text-red-600 px-0 h-auto font-medium"
-                    >
-                      Delete
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        )}
+                  <Button variant="link" className="text-red-600 px-0">
+                    Delete
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
 
         {/* Pagination */}
         {totalPages > 1 && (
