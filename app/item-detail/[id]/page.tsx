@@ -1,18 +1,8 @@
-<<<<<<< HEAD
-" use client";
-
-import MailButton from "@/app/_components/detail-contact/MailButton";
-import PhoneButton from "@/app/_components/detail-contact/PhoneButton";
-
-// import PhoneButton from "@/app/_components/navigantion/PhoneButton";
-// import ContactButton from "@/app/_components/navigantion/PhoneButton";
-=======
 "use client";
 
->>>>>>> 58af694 (skeleton)
 import { Badge } from "@/components/ui/badge";
 import { itemType } from "@/lib/types";
-import ItemDetailSkeleton from "@/app/_components/main/Skeleton/ItemDetailSkeleton";
+
 import {
   ChartBarStacked,
   ClipboardMinus,
@@ -25,16 +15,11 @@ import {
 import { MapPin } from "lucide-react";
 
 import Link from "next/link";
-<<<<<<< HEAD
-import React, { useState } from "react";
-async function getItems() {
-  const response = await fetch("http:localhost:3000/api/items");
-  const resData = await response.json();
-  return resData.data;
-}
-=======
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import PhoneButton from "@/app/_components/detail-contact/PhoneButton";
+import MailButton from "@/app/_components/detail-contact/MailButton";
+import ItemDetailSkeleton from "@/app/_components/main/Skeleton/ItemDetailSkeleton";
 
 export default function LostItemDetail() {
   const params = useParams();
@@ -59,7 +44,6 @@ export default function LostItemDetail() {
     }
     fetchItems();
   }, [id]);
->>>>>>> 58af694 (skeleton)
 
   if (loading) {
     return <ItemDetailSkeleton loading={true} />;

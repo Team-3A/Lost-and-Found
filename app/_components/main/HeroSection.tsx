@@ -1,10 +1,6 @@
 // "use client";
 
 import { Input } from "@/components/ui/input";
-<<<<<<< HEAD
-=======
-
->>>>>>> 58af694 (skeleton)
 import Link from "next/link";
 import Card from "./Card";
 
