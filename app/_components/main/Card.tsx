@@ -36,62 +36,65 @@ export default function Card() {
       {!loading && (
         <>
           <Marquee pauseOnHover className="gap-5 [--duration:20s]">
-            {lostItems.map((item: itemType) => (
-              <Link key={item._id} href={`/item-detail/${item._id}`}>
-                <div className="border rounded-2xl shadow-md w-60 p-2 bg-white hover:shadow-lg transition">
-                  <div className="relative h-40">
-                    <Badge variant="destructive" className="absolute m-2">
-                      lost
-                    </Badge>
+            {lostItems
+              .map((item: itemType) => (
+                <Link key={item._id} href={`/item-detail/${item._id}`}>
+                  <div className="border rounded-2xl shadow-md w-60 p-2 bg-white hover:shadow-lg transition">
+                    <div className="relative h-40">
+                      <Badge variant="destructive" className="absolute m-2">
+                        lost
+                      </Badge>
 
-                    <Badge className="absolute bottom-2 right-2 opacity-75 bg-white text-black whitespace-normal h-auto flex gap-1">
-                      <MapPin className="w-4 h-4" />
-                      {item.location}
-                    </Badge>
+                      <Badge className="absolute bottom-2 right-2 opacity-75 bg-white text-black whitespace-normal h-auto flex gap-1">
+                        <MapPin className="w-4 h-4" />
+                        {item.location}
+                      </Badge>
 
-                    <img
-                      src={item.imageUrl}
-                      alt={item.title}
-                      className="h-40 w-full object-cover rounded-xl"
-                    />
+                      <img
+                        src={item.imageUrl}
+                        alt={item.title}
+                        className="h-40 w-full object-cover rounded-xl"
+                      />
+                    </div>
+
+                    <h2 className="text-lg font-bold mt-2">{item.title}</h2>
+                    <p className="text-gray-600">{item.category}</p>
                   </div>
-
-                  <h2 className="text-lg font-bold mt-2">{item.title}</h2>
-                  <p className="text-gray-600">{item.category}</p>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))
+              .slice(0, 8)}
           </Marquee>
 
           <Marquee pauseOnHover reverse className="gap-5 [--duration:20s]">
-            {foundItems.map((item: itemType) => (
-              <Link key={item._id} href={`/item-detail/${item._id}`}>
-                <div className="border rounded-2xl shadow-md w-60 p-2 bg-white hover:shadow-lg transition">
-                  <div className="relative h-40">
-                    <Badge
-                      variant="default"
-                      className="absolute m-2 bg-green-500"
-                    >
-                      found
-                    </Badge>
+            {foundItems
+              .map((item: itemType) => (
+                <Link key={item._id} href={`/item-detail/${item._id}`}>
+                  <div className="border rounded-2xl shadow-md w-60 p-2 bg-white hover:shadow-lg transition">
+                    <div className="relative h-40">
+                      <Badge
+                        variant="default"
+                        className="absolute m-2 bg-green-500">
+                        found
+                      </Badge>
 
-                    <Badge className="absolute bottom-2 right-2 whitespace-normal h-auto opacity-75 bg-white text-black flex gap-1">
-                      <MapPin className="w-4 h-4" />
-                      {item.location}
-                    </Badge>
+                      <Badge className="absolute bottom-2 right-2 whitespace-normal h-auto opacity-75 bg-white text-black flex gap-1">
+                        <MapPin className="w-4 h-4" />
+                        {item.location}
+                      </Badge>
 
-                    <img
-                      src={item.imageUrl}
-                      alt={item.title}
-                      className="h-40 w-full object-cover rounded-xl"
-                    />
+                      <img
+                        src={item.imageUrl}
+                        alt={item.title}
+                        className="h-40 w-full object-cover rounded-xl"
+                      />
+                    </div>
+
+                    <h2 className="text-lg font-bold mt-2">{item.title}</h2>
+                    <p className="text-gray-600">{item.category}</p>
                   </div>
-
-                  <h2 className="text-lg font-bold mt-2">{item.title}</h2>
-                  <p className="text-gray-600">{item.category}</p>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))
+              .slice(0, 8)}
           </Marquee>
         </>
       )}

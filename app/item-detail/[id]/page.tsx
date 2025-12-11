@@ -3,14 +3,7 @@
 import { Badge } from "@/components/ui/badge";
 import { itemType } from "@/lib/types";
 
-import {
-  ChartBarStacked,
-  ClipboardMinus,
-  Mail,
-  Phone,
-  Star,
-  Wallet,
-} from "lucide-react";
+import { ChartBarStacked, ClipboardMinus, Star, Wallet } from "lucide-react";
 
 import { MapPin } from "lucide-react";
 
@@ -142,8 +135,7 @@ export default function LostItemDetail() {
                 <div className="relative h-40 w-full">
                   <Badge
                     className="absolute flex m-2 flex-end "
-                    variant="destructive"
-                  >
+                    variant="destructive">
                     {itm.type}
                   </Badge>
                   <Badge className="absolute bg-white text-black mt-21 mr-2 top-10 right-0">
@@ -152,8 +144,7 @@ export default function LostItemDetail() {
                   <img
                     src={itm.imageUrl || "skeleton.png"}
                     alt={itm.title}
-                    className="w-full h-40 object-cover rounded-t-2xl"
-                  ></img>
+                    className="w-full h-40 object-cover rounded-t-2xl"></img>
                 </div>
                 <h2 className="text-xl font-bold m-2">{itm.title}</h2>
                 <p className="text-gray-600 m-2 mb-10">{itm.category}</p>
