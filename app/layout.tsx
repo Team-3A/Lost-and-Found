@@ -1,10 +1,11 @@
+// app/layout.tsx
 import { type Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "./_components/navigantion/Footer";
 import { Header } from "./_components/navigantion/Header";
-import { Suspense } from "react";
+import XmasSnow from "./_components/main/XmasSnow";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,23 +24,24 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {" "}
-        <Suspense>
-          <ClerkProvider>
-            <Header />
-            {children}
-            <Footer />
-          </ClerkProvider>
-        </Suspense>
-      </body>
+      {/* ClerkProvider must wrap everything */}
+      <ClerkProvider>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          <XmasSnow />
+
+          <Header />
+
+          {children}
+
+          <Footer />
+        </body>
+      </ClerkProvider>
     </html>
   );
 }
