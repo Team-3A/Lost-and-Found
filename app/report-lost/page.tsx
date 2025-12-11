@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { CloudUpload, Calendar, MapPin, Sun } from "lucide-react";
+import { useAuth } from "@clerk/nextjs";
 
 const THEMES = [
   { id: "default", label: "Sky (default)" },
@@ -33,8 +34,10 @@ export default function ReportLostThemes() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState<number | string>("");
   const [image, setImage] = useState<File | null>(null);
+  const { getToken } = useAuth();
 
   const handleSubmit = async () => {
+    const token = await getToken();
     const formData = new FormData();
     formData.append("type", "lost");
     formData.append("title", title);
@@ -43,13 +46,24 @@ export default function ReportLostThemes() {
     formData.append("location", location);
     formData.append("email", email);
     formData.append("phone", String(phone));
-    if (image) formData.append("image", image);
+
+    if (image) {
+      console.log("hello");
+      formData.append("image", image);
+    } else
+      formData.append(
+        "image",
+        "https://community.softr.io/uploads/db9110/original/2X/7/74e6e7e382d0ff5d7773ca9a87e6f6f8817a68a6.jpeg"
+      );
 
     const res = await fetch("/api/items", {
       method: "POST",
       body: formData,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "X-App-Client": "sentinel-trace",
+      },
     });
-
     const data = await res.json();
     alert(data.message || "Saved!");
   };
