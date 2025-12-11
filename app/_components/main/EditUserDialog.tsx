@@ -36,9 +36,13 @@ export const EditUserDialog = ({
   const phoneChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
     setPhone(e.target.value);
 
-  const imageChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) setImage(e.target.files[0]);
-  };
+  const categoryChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
+    setCategory(e.target.value);
+
+  const locationChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
+    setLocation(e.target.value);
+  const emailChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
+    setEmail(e.target.value);
 
   // --- PATCH update ---
   const editItemHandler = async (id: string) => {
@@ -130,13 +134,28 @@ export const EditUserDialog = ({
             onChange={phoneChangeHandler}
           />
         </div>
-
-        <div className="flex gap-4 justify-between h-36">
-          <Label>Image</Label>
+        <div className="flex gap-4 justify-between">
+          <Label>Category</Label>
           <Input
-            type="file"
             className="w-[288px]"
-            onChange={imageChangeHandler}
+            value={category}
+            onChange={categoryChangeHandler}
+          />
+        </div>
+        <div className="flex gap-4 justify-between">
+          <Label>Location</Label>
+          <Input
+            className="w-[288px]"
+            value={location}
+            onChange={locationChangeHandler}
+          />
+        </div>
+        <div className="flex gap-4 justify-between">
+          <Label>Email</Label>
+          <Input
+            className="w-[288px]"
+            value={email}
+            onChange={emailChangeHandler}
           />
         </div>
 
