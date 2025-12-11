@@ -207,9 +207,9 @@ export function Header() {
             )}
           </div>
           <div className="md:hidden ">
-            <Menu className="text-4xl" onClick={() => setOpen(!open)} />
+            <Menu className="text-4xl" onClick={() => setIsOpen(!isOpen)} />
           </div>
-          <ResponsiveMenu open={open} />
+          <ResponsiveMenu open={isOpen} />
           <Link href="/user">
             <Avatar>
               <AvatarImage src={user?.imageUrl} />
