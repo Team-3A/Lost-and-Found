@@ -16,12 +16,12 @@ const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-gray-600 text-sm mb-6 max-w-xs leading-relaxed">
-              Discover, report, and recover lost and found items with ease.
-              Connecting communities one item at a time.
+              Алдагдсан болон олдсон эд зүйлсийг хялбар мэдэгдэж, олоход туслах.
+              Олон нийтийг холбож, эд зүйлсийг эргүүлэн олгоно.
             </p>
             <div className="flex space-x-5">
               <a
-                href="https://www.facebook.com/login.php?next=https%3A%2F%2Fwww.facebook.com%2Fstories%2F932071574854670%2F%3Fsource%3Dprofile_highlight"
+                href="https://www.facebook.com/"
                 className="text-gray-500 hover:text-gray-900 transition-colors"
               >
                 <Facebook className="w-5 h-5" />
@@ -53,59 +53,59 @@ const Footer: React.FC = () => {
               <ul className="space-y-3 text-sm text-gray-600">
                 <li>
                   <a href="#" className="hover:text-blue-600 transition-colors">
-                    Home
+                    Нүүр
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-blue-600 transition-colors">
-                    Categories
+                    Ангилал
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-blue-600 transition-colors">
-                    Submit Item
+                    Зүйл илгээх
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-blue-600 transition-colors">
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-bold text-gray-900 mb-4">Resources</h3>
-              <ul className="space-y-3 text-sm text-gray-600">
-                <li>
-                  <a href="#" className="hover:text-blue-600 transition-colors">
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-blue-600 transition-colors">
-                    How It Works
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-blue-600 transition-colors">
-                    FAQ
+                    Холбоо барих
                   </a>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h3 className="font-bold text-gray-900 mb-4">Legal</h3>
+              <h3 className="font-bold text-gray-900 mb-4">Нөөц мэдээлэл</h3>
               <ul className="space-y-3 text-sm text-gray-600">
                 <li>
                   <a href="#" className="hover:text-blue-600 transition-colors">
-                    Privacy Policy
+                    Бидний тухай
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-blue-600 transition-colors">
-                    Terms of Service
+                    Хэрхэн ажилладаг вэ
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-blue-600 transition-colors">
+                    Түгээмэл асуулт
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-bold text-gray-900 mb-4">Хууль эрх зүй</h3>
+              <ul className="space-y-3 text-sm text-gray-600">
+                <li>
+                  <a href="#" className="hover:text-blue-600 transition-colors">
+                    Нууцлалын бодлого
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-blue-600 transition-colors">
+                    Үйлчилгээний нөхцөл
                   </a>
                 </li>
               </ul>
@@ -115,7 +115,7 @@ const Footer: React.FC = () => {
 
         <div className="border-t border-gray-200 mt-16 pt-8 text-center">
           <p className="text-gray-500 text-sm">
-            &copy; 2025 Sentinel Trace. All rights reserved.
+            &copy; 2025 Sentinel Trace. Бүх эрх хуулиар хамгаалагдсан.
           </p>
         </div>
       </div>

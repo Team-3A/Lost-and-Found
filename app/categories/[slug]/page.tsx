@@ -25,7 +25,7 @@ export default async function CategoryPage({
       {lostItems.length > 0 && (
         <>
           <h2 className="text-2xl font-semibold mb-6 text-red-600">
-            Lost Items
+            Алдагдсан зүйлс
           </h2>
           <div className="flex flex-wrap gap-4">
             {lostItems.map((item: itemType) => (
@@ -38,7 +38,7 @@ export default async function CategoryPage({
       {foundItems.length > 0 && (
         <>
           <h2 className="text-2xl font-semibold mb-6 mt-12 text-green-600">
-            Found Items
+            Олсон зүйлс
           </h2>
           <div className="flex flex-wrap gap-4">
             {foundItems.map((item: itemType) => (

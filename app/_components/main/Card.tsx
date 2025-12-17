@@ -7,7 +7,7 @@ import { itemType } from "@/lib/types";
 import { MapPin } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import SkeletonCards from "./Skeleton/SekeletonCard";
+import SkeletonCards from "../skeleton/SekeletonCard";
 
 export default function Card() {
   const [items, setItems] = useState<itemType[]>([]);
@@ -73,7 +73,8 @@ export default function Card() {
                     <div className="relative h-40">
                       <Badge
                         variant="default"
-                        className="absolute m-2 bg-green-500">
+                        className="absolute m-2 bg-green-500"
+                      >
                         found
                       </Badge>
 
