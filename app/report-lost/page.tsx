@@ -127,16 +127,16 @@ export default function ReportLostThemes() {
               theme === "purple" ? "text-violet-600" : "text-sky-600"
             }`}
           >
-            Lost & Found
+            Алдагдсан & Олсон
           </p>
           <h1
             className={`mt-2 text-4xl font-extrabold leading-tight ${textColor}`}
           >
-            Report a Lost Item
+            Алдагдсан зүйлс бүртгэх
           </h1>
           <p className={`mt-2 ${muted} max-w-2xl mx-auto`}>
-            Clear titles, photos and contact info help others find your item
-            faster.
+            Тодорхой гарчиг, зураг, холбоо барих мэдээлэл нь хурдан олоход
+            тусална.
           </p>
         </header>
 
@@ -161,10 +161,10 @@ export default function ReportLostThemes() {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h2 className={`text-lg font-semibold ${textColor}`}>
-                    Item details
+                    Эд зүйлсийн дэлгэрэнгүй
                   </h2>
                   <p className={`text-sm ${muted}`}>
-                    Give a clear, short title and a precise description.
+                    Гарчиг, тайлбарыг тодорхой, товч оруулна уу.
                   </p>
                 </div>
               </div>
@@ -178,10 +178,10 @@ export default function ReportLostThemes() {
                   <label
                     className={`block text-sm font-medium mb-2 ${textColor}`}
                   >
-                    Title
+                    Гарчиг
                   </label>
                   <Input
-                    placeholder="Black leather wallet — brand, color, distinguishing mark"
+                    placeholder="Хар арьсан түрийвч (брэнд, өнгө, онцлог)"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     className="rounded-lg"
@@ -192,10 +192,10 @@ export default function ReportLostThemes() {
                   <label
                     className={`block text-sm font-medium mb-2 ${textColor}`}
                   >
-                    Description
+                    Тайлбар
                   </label>
                   <Textarea
-                    placeholder="Where you last saw it, any stickers, cards, or unique marks..."
+                    placeholder="Сүүлд хаана байсан, онцлог тэмдэглэгээ, наалт, карт зэргийг оруулна уу"
                     value={desc}
                     onChange={(e) => setDesc(e.target.value)}
                     className="min-h-[120px] rounded-lg"
@@ -206,23 +206,25 @@ export default function ReportLostThemes() {
                   <label
                     className={`block text-sm font-medium mb-2 ${textColor}`}
                   >
-                    Category
+                    Ангилал
                   </label>
                   <Select onValueChange={setCategory}>
                     <SelectTrigger className="w-full rounded-lg">
                       <SelectValue placeholder="Select category" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="wallet">Wallet</SelectItem>
-                      <SelectItem value="phone">Phone</SelectItem>
-                      <SelectItem value="bag">Bag</SelectItem>
-                      <SelectItem value="key">Keys</SelectItem>
-                      <SelectItem value="electronics">Electronics</SelectItem>
-                      <SelectItem value="documents">Documents</SelectItem>
-                      <SelectItem value="clothes">Clothes</SelectItem>
-                      <SelectItem value="jewelry">Jewelry</SelectItem>
-                      <SelectItem value="pet">Pet</SelectItem>
-                      <SelectItem value="others">Others</SelectItem>
+                      <SelectItem value="wallet">Түрийвч</SelectItem>
+                      <SelectItem value="phone">Утас</SelectItem>
+                      <SelectItem value="bag">Цүнх</SelectItem>
+                      <SelectItem value="key">Түлхүүр</SelectItem>
+                      <SelectItem value="electronics">
+                        Цахилгаан хэрэгсэл
+                      </SelectItem>
+                      <SelectItem value="documents">Баримт бичиг</SelectItem>
+                      <SelectItem value="clothes">Хувцас</SelectItem>
+                      <SelectItem value="jewelry">Гоёл чимэглэл</SelectItem>
+                      <SelectItem value="pet">Амьтан</SelectItem>
+                      <SelectItem value="others">Бусад</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -245,12 +247,12 @@ export default function ReportLostThemes() {
                   <label
                     className={`flex items-center gap-2 text-sm font-medium mb-2 ${textColor}`}
                   >
-                    <MapPin className="w-4 h-4 text-sky-500" /> Location
+                    <MapPin className="w-4 h-4 text-sky-500" /> Байршил
                   </label>
                   <Input
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    placeholder="e.g., Sukhbaatar Square, Blue Cafe (floor 2)"
+                    placeholder="Жишээ нь: Сүхбаатарын талбай, Blue Cafe (2-р давхар)"
                     className="rounded-lg"
                   />
                 </div>
@@ -259,8 +261,8 @@ export default function ReportLostThemes() {
                   <label
                     className={`flex items-center gap-2 text-sm font-medium mb-2 ${textColor}`}
                   >
-                    <CloudUpload className="w-4 h-4 text-sky-500" /> Photo
-                    (optional)
+                    <CloudUpload className="w-4 h-4 text-sky-500" />{" "}
+                    Зураг(сонголтоор)
                   </label>
                   <div className="flex items-center gap-4">
                     <input
@@ -277,30 +279,15 @@ export default function ReportLostThemes() {
                   </div>
                 </div>
 
-                {/* <div>
-                  <label
-                    className={`flex items-center gap-2 text-sm font-medium mb-2 ${textColor}`}
-                  >
-                    
-                    <Calendar 
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="w-4 h-4 text-sky-500" /> Date found
-                  </label>
-                  <input
-                    type="date"
-                    className="w-full rounded-lg border border-gray-200 p-2"
-                  />
-                </div> */}
                 <div>
                   <label
                     className={`flex items-center gap-2 text-sm font-medium mb-2 ${textColor}`}
                   >
-                    <Calendar className="w-4 h-4 text-sky-500" /> Date lost
+                    <Calendar className="w-4 h-4 text-sky-500" /> Алдагдсан өдөр
                   </label>
                   <input
                     type="date"
-                    value={date} // state
+                    value={date}
                     onChange={(e) => setDate(e.target.value)}
                     className="w-full rounded-lg border border-gray-200 p-2"
                   />
@@ -320,11 +307,10 @@ export default function ReportLostThemes() {
               }`}
             >
               <h3 className={`text-lg font-semibold mb-2 ${textColor}`}>
-                Contact information
+                Холбоо барих мэдээлэл
               </h3>
               <p className={`text-sm mb-4 ${muted}`}>
-                Provide at least one way to reach you. We recommend email +
-                phone.
+                Холбоо барих дор хаяж нэг мэдээлэл оруулна уу (имэйл, утас).
               </p>
 
               <div
@@ -338,13 +324,13 @@ export default function ReportLostThemes() {
                   <label
                     className={`block text-sm font-medium mb-2 ${textColor}`}
                   >
-                    Email
+                    И-мэйл
                   </label>
                   <Input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="your.email@example.com"
+                    placeholder="jishee@gmail.com"
                     className="rounded-lg"
                   />
                 </div>
@@ -353,7 +339,7 @@ export default function ReportLostThemes() {
                   <label
                     className={`block text-sm font-medium mb-2 ${textColor}`}
                   >
-                    Phone
+                    Утас
                   </label>
                   <Input
                     type="number"
@@ -367,9 +353,6 @@ export default function ReportLostThemes() {
             </section>
 
             <div className="flex items-center justify-between gap-4">
-              <div className={`text-sm ${muted}`}>
-                By submitting you agree to our guidelines.
-              </div>
               <Button
                 type="submit"
                 className={`ml-auto rounded-lg px-6 py-3 font-semibold ${
@@ -384,7 +367,7 @@ export default function ReportLostThemes() {
                     : "bg-gradient-to-r from-sky-600 to-indigo-600 text-white"
                 }`}
               >
-                Submit Report
+                Илгээх
               </Button>
             </div>
           </div>

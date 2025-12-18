@@ -46,7 +46,7 @@ export const EditUserDialog = ({
         setType(data.type);
       });
   }, [id]);
-  // --- Handlers ---
+
   const titleChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
     setTitle(e.target.value);
 
@@ -69,7 +69,7 @@ export const EditUserDialog = ({
   const typeChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setType(e.target.value);
   };
-  // --- PATCH update ---
+
   const editItemHandler = async (id: string) => {
     const formData = new FormData();
     formData.append("id", id);
@@ -95,8 +95,6 @@ export const EditUserDialog = ({
     alert("Item updated!");
     window.location.reload();
   };
-
-  // --- DELETE item ---
 
   const deleteItemHandler = async (id: string) => {
     await fetch("/api/items", {
@@ -192,7 +190,8 @@ export const EditUserDialog = ({
           <Button
             variant="outline"
             className="bg-white border border-red-500"
-            onClick={() => deleteItemHandler(id)}>
+            onClick={() => deleteItemHandler(id)}
+          >
             <Trash color="red" />
           </Button>
 

@@ -76,16 +76,16 @@ export function Header() {
                 <NavigationMenuLink asChild>
                   <Link
                     href="/"
-                    className="hover:text-blue-600 transition text-[18px] font-medium text-gray-700 "
+                    className="hover:text-blue-600 transition text-[18px]  text-gray-700 font-semibold"
                   >
-                    Home
+                    Нүүр
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-[18px] font-medium text-gray-700 bg-transparent hover:bg-gray-100/50">
-                  Categories
+                <NavigationMenuTrigger className="text-[18px] font-semibold text-gray-700 bg-transparent hover:bg-gray-100/50">
+                  Ангилал
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
@@ -113,23 +113,12 @@ export function Header() {
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-[18px] font-medium text-gray-700 bg-transparent hover:bg-gray-100/50">
-                  Submit Item
+                <NavigationMenuTrigger className="text-[18px] font-semibold text-gray-700 bg-transparent hover:bg-gray-100/50">
+                  Бараа илгээх
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid gap-3 p-4 w-[250px]">
-                    <li className="row-span-3">
-                      <NavigationMenuLink asChild>
-                        <div className="flex h-full w-full select-none flex-col justify-end rounded-md from-blue-500 to-indigo-600 p-6 no-underline outline-none focus:shadow-md">
-                          <div className="mb-2 mt-4 text-lg font-medium text-white">
-                            Lost something?
-                          </div>
-                          <p className="text-sm leading-tight text-white/90">
-                            Report it immediately to help our community find it.
-                          </p>
-                        </div>
-                      </NavigationMenuLink>
-                    </li>
+                    <li className="row-span-3"></li>
                     <li>
                       <NavigationMenuLink asChild>
                         <Link
@@ -137,10 +126,10 @@ export function Header() {
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
                           <div className="text-sm font-medium leading-none">
-                            Submit Lost Item
+                            Алдагдсан зүйл илгээх
                           </div>
                           <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
-                            I lost an item
+                            Би эд зүйлээ алдсан.
                           </p>
                         </Link>
                       </NavigationMenuLink>
@@ -152,10 +141,10 @@ export function Header() {
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
                           <div className="text-sm font-medium leading-none">
-                            Submit Found Item
+                            Олсон зүйл илгээх
                           </div>
                           <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
-                            I found an item
+                            Би эд зүйл олсон.
                           </p>
                         </Link>
                       </NavigationMenuLink>
@@ -172,7 +161,7 @@ export function Header() {
             <IoSearch className="absolute left-2.5 top-2.5 text-gray-400" />
             <Input
               className="pl-9 bg-gray-50 border-gray-200 focus:bg-white rounded-full h-9 text-sm"
-              placeholder="Search..."
+              placeholder="Хайх..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onFocus={() => query.length > 0 && setIsOpen(true)}
