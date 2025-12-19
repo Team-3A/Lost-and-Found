@@ -43,7 +43,7 @@ export default function LostItemDetail() {
   }
 
   if (!item) {
-    return <div className="p-8">Item not found</div>;
+    return <div className="p-8">Тийм эд зүйл олдсонгүй</div>;
   }
 
   return (
@@ -75,39 +75,32 @@ export default function LostItemDetail() {
         </div>
         <div>
           <div className="flex gap-4 flex-col w-80 rounded-md border p-6 h-fit shadow-ls">
-            <h1 className="text-xl font-semibold">Key Details</h1>
+            <h1 className="text-xl font-semibold">Онцлох зүйлс</h1>
             <div className="flex justify-between">
               <div className="flex gap-2">
                 <ChartBarStacked className="text-gray-600" />
-                <span className="font-medium text-gray-600">Category:</span>
+                <span className="font-medium text-gray-600">Ангилал:</span>
               </div>
               <span className="font-medium text-gray-800">{item.category}</span>
             </div>
             <div className="flex justify-between">
               <div className="flex gap-2">
                 <ClipboardMinus className="text-gray-600" />
-                <span className="font-medium text-gray-600">Reported:</span>
+                <span className="font-medium text-gray-600">Илгээсэн:</span>
               </div>
-              <span className="font-medium text-gray-800">2 days ago</span>
+              <span className="font-medium text-gray-800">2 өдрийн өмнө</span>
             </div>
             <div className="flex justify-between">
               <div className="flex gap-2">
                 <Wallet className="text-gray-600" />
-                <span className="font-medium text-gray-600">Value:</span>
+                <span className="font-medium text-gray-600">Шагнал:</span>
               </div>
-              <span className="font-medium text-gray-800">$150</span>
-            </div>
-            <div className="flex justify-between">
-              <Star className="text-gray-600" />
-              <span className="font-medium text-gray-600">Condition:</span>
-              <span className="font-medium text-gray-800">
-                Good with minor wear
-              </span>
+              <span className="font-medium text-gray-800">150,000 төгрөг</span>
             </div>
           </div>
 
           <div className="flex gap-4 flex-col w-80 rounded-md border p-6 h-fit shadow-ls mt-5">
-            <h1 className="text-xl font-semibold">Actions</h1>
+            <h1 className="text-xl font-semibold">Холбогдох мэдээлэл</h1>
 
             <MailButton email={item.email} />
             <PhoneButton phone={item.phone} />
@@ -115,17 +108,15 @@ export default function LostItemDetail() {
         </div>
       </div>
       <div className="max-w-4xl mt-10 shadow-ls p-6 rounded-lg border border-gray-200">
-        <h2 className="text-2xl font-semibold mb-4">Description</h2>
+        <h2 className="text-2xl font-semibold mb-4">Дэлгэрэнгүй</h2>
         <p className="text-gray-700 leading-relaxed">{item.desc}</p>
       </div>
       <div className="max-w-4xl mt-10 shadow-ls p-6 rounded-lg border border-gray-200">
-        <h2 className="text-2xl font-semibold mb-4">Location</h2>
+        <h2 className="text-2xl font-semibold mb-4">Байршил</h2>
         <p className="text-gray-700 leading-relaxed">{item.location}</p>
       </div>
-      <h6 className="flex justify-center items-center mt-5 text-gray-500">
-        Approximate location where the item was last seen.
-      </h6>
-      <h1 className="text-3xl mt-20 font-semibold">Related Items</h1>
+
+      <h1 className="text-3xl mt-20 font-semibold">Холбоотой зүйлс</h1>
       <div className="gap-4 mt-10 mb-10 grid grid-cols-1 md:grid-cols-4">
         {items
           .filter((itm: itemType) => item.category == itm.category)
