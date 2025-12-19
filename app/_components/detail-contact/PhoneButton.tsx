@@ -13,7 +13,7 @@ export default function PhoneButton({ phone }: { phone: number | null }) {
         className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium"
       >
         <Phone className="inline-block mr-2" />
-        Report Item Match
+        Утасны дугаар
       </button>
 
       {open && (
@@ -29,7 +29,7 @@ export default function PhoneButton({ phone }: { phone: number | null }) {
               onClick={() => setOpen(false)}
               className="w-full bg-blue-600 text-white py-2 rounded-lg"
             >
-              Close
+              хаах
             </button>
           </div>
         </div>

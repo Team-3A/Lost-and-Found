@@ -13,7 +13,7 @@ export default function MailButton({ email }: { email: string }) {
         className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium"
       >
         <Mail className="inline-block mr-2" />
-        Contact Finder
+        И-мэйл хаяг харах
       </button>
 
       {open && (
@@ -29,7 +29,7 @@ export default function MailButton({ email }: { email: string }) {
               onClick={() => setOpen(false)}
               className="w-full bg-blue-600 text-white py-2 rounded-lg"
             >
-              Close
+              Хаах
             </button>
           </div>
         </div>
